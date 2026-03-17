@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Contact Nina Cralle — UX/UI designer open to internships and entry-level opportunities." />
+  <title>Contact — Nina Cralle</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <!-- NAVIGATION -->
+  <nav class="nav" role="navigation" aria-label="Main navigation">
+    <div class="nav__inner">
+      <a href="index.html" class="nav__logo">Nina Cralle</a>
+      <ul class="nav__links" role="list">
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html" class="active">Contact</a></li>
+      </ul>
+      <button class="nav__toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+  <div class="nav__mobile" aria-hidden="true">
+    <a href="projects.html">Projects</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+  </div>
+
+
+  <!-- CONTACT PAGE -->
+  <main class="contact-page">
+    <div class="contact-page__inner">
+
+      <p class="eyebrow" style="margin-bottom:1rem;" data-animate>Get in touch</p>
+
+      <h1 data-animate data-delay="1">
+        Let's talk.
+      </h1>
+
+      <!-- REPLACE: customize this message -->
+      <p data-animate data-delay="2">
+        I'm currently open to internships and entry-level opportunities in UX/UI, product design,
+        and related roles. If you're working on something interesting or want to connect, I'd love
+        to hear from you.
+      </p>
+
+      <!-- Contact links -->
+      <nav class="contact-links" aria-label="Contact links" data-animate data-delay="3">
+
+        <!-- REPLACE: update href with your actual email address -->
+        <a href="mailto:your.email@example.com" class="contact-item">
+          <span class="contact-item__icon" aria-hidden="true">✉</span>
+          <div>
+            <div class="contact-item__label">Email</div>
+            <!-- REPLACE: your email -->
+            <div class="contact-item__value">your.email@example.com</div>
+          </div>
+        </a>
+
+        <!-- REPLACE: update href with your actual LinkedIn URL -->
+        <a href="https://linkedin.com/in/ninacralle" target="_blank" rel="noopener" class="contact-item">
+          <span class="contact-item__icon" aria-hidden="true">in</span>
+          <div>
+            <div class="contact-item__label">LinkedIn</div>
+            <!-- REPLACE: your LinkedIn handle -->
+            <div class="contact-item__value">linkedin.com/in/ninacralle</div>
+          </div>
+        </a>
+
+        <!-- REPLACE: update href to your actual resume PDF, or remove this block if not ready -->
+        <a href="assets/resume/nina-cralle-resume.pdf" target="_blank" rel="noopener" class="contact-item">
+          <span class="contact-item__icon" aria-hidden="true">↓</span>
+          <div>
+            <div class="contact-item__label">Resume</div>
+            <div class="contact-item__value">Download PDF</div>
+          </div>
+        </a>
+
+        <!-- OPTIONAL: add Behance, Dribbble, or other portfolio link here -->
+        <!--
+        <a href="https://behance.net/YOURHANDLE" target="_blank" rel="noopener" class="contact-item">
+          <span class="contact-item__icon" aria-hidden="true">✦</span>
+          <div>
+            <div class="contact-item__label">Behance</div>
+            <div class="contact-item__value">behance.net/yourhandle</div>
+          </div>
+        </a>
+        -->
+
+      </nav>
+
+    </div>
+  </main>
+
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer__inner">
+      <span class="footer__name">Nina Cralle</span>
+      <nav class="footer__links" aria-label="Footer navigation">
+        <a href="projects.html">Projects</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <!-- REPLACE: update LinkedIn URL -->
+        <a href="https://linkedin.com/in/ninacralle" target="_blank" rel="noopener">LinkedIn ↗</a>
+      </nav>
+      <p class="footer__copy">© 2026 Nina Cralle. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
