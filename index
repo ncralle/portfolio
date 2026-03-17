@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Nina Cralle — UX/UI and Product Designer based in Virginia. Portfolio of human-centered, research-informed design work." />
+  <title>Nina Cralle — Designer</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <!-- =====================================================
+       NAVIGATION
+       ===================================================== -->
+  <nav class="nav" role="navigation" aria-label="Main navigation">
+    <div class="nav__inner">
+
+      <!-- REPLACE: update href if site lives in a subfolder -->
+      <a href="index.html" class="nav__logo">Nina Cralle</a>
+
+      <!-- Desktop links -->
+      <ul class="nav__links" role="list">
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+
+      <!-- Mobile toggle button -->
+      <button class="nav__toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile nav drawer -->
+  <div class="nav__mobile" aria-hidden="true">
+    <a href="projects.html">Projects</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+  </div>
+
+
+  <!-- =====================================================
+       HERO
+       ===================================================== -->
+  <section class="hero">
+    <div class="hero__inner">
+
+      <div class="hero__eyebrow" data-animate>
+        <span class="eyebrow">UX / Product Design</span>
+      </div>
+
+      <!-- REPLACE: Adjust value statement as needed -->
+      <h1 class="display hero__headline" data-animate data-delay="1">
+        Designing for<br/>
+        <em>people first.</em>
+      </h1>
+
+      <!-- REPLACE: Refine this intro sentence to match your voice -->
+      <p class="hero__sub" data-animate data-delay="2">
+        I'm Nina — an Interactive Design student at James Madison University focused on UX/UI,
+        accessibility, and human-centered product experiences that are as thoughtful as they are polished.
+      </p>
+
+      <div class="hero__cta" data-animate data-delay="3">
+        <a href="projects.html" class="btn btn--primary">View my work</a>
+        <a href="about.html" class="btn btn--outline">About me</a>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- =====================================================
+       FEATURED PROJECTS
+       ===================================================== -->
+  <section class="featured section">
+    <div class="container">
+
+      <div class="featured__header" data-animate>
+        <div>
+          <p class="eyebrow" style="margin-bottom: 0.5rem;">Selected Work</p>
+          <h2>Recent Projects</h2>
+        </div>
+        <a href="projects.html" class="btn btn--ghost">View all projects</a>
+      </div>
+
+      <div class="featured__grid">
+
+        <!-- —— PROJECT CARD: MyAbility —— -->
+        <!-- REPLACE: swap img src with your actual screenshot/mockup -->
+        <a href="projects/myability.html" class="card" data-animate data-delay="1">
+          <div class="card__image">
+            <div class="img-placeholder" aria-hidden="true">myability · hero image</div>
+            <!-- REPLACE with: <img src="assets/images/projects/myability/card-cover.jpg" alt="MyAbility app screens showing resource discovery interface" /> -->
+          </div>
+          <div class="card__body">
+            <span class="card__eyebrow">UX Design · 2026</span>
+            <h3 class="card__title">MyAbility</h3>
+            <p class="card__desc">Helping students with mobility disabilities find healthcare, resources, and community support — in one place.</p>
+            <div class="card__badge">🥈 Silver — AEJMC Festival</div>
+            <span class="card__link">View case study →</span>
+          </div>
+        </a>
+
+        <!-- —— PROJECT CARD: CookMate —— -->
+        <a href="projects/cookmate.html" class="card" data-animate data-delay="2">
+          <div class="card__image">
+            <div class="img-placeholder" aria-hidden="true">cookmate · hero image</div>
+            <!-- REPLACE with: <img src="assets/images/projects/cookmate/card-cover.jpg" alt="CookMate app interface showing recipe organization" /> -->
+          </div>
+          <div class="card__body">
+            <span class="card__eyebrow">UX / Mobile Design · [YEAR]</span>
+            <h3 class="card__title">CookMate</h3>
+            <p class="card__desc">A mobile app concept that simplifies cooking by organizing recipes, ingredients, and steps in one usable flow.</p>
+            <span class="card__link">View case study →</span>
+          </div>
+        </a>
+
+        <!-- —— PROJECT CARD: Sunnyside —— -->
+        <a href="projects/sunnyside.html" class="card" data-animate data-delay="3">
+          <div class="card__image">
+            <div class="img-placeholder" aria-hidden="true">sunnyside · hero image</div>
+            <!-- REPLACE with: <img src="assets/images/projects/sunnyside/card-cover.jpg" alt="Sunnyside Communities web prototype screenshots" /> -->
+          </div>
+          <div class="card__body">
+            <span class="card__eyebrow">Web Design · [YEAR]</span>
+            <h3 class="card__title">Sunnyside Communities</h3>
+            <p class="card__desc">A senior-accessible web prototype for outdoor learning and community connection, built with accessibility at its core.</p>
+            <span class="card__link">View case study →</span>
+          </div>
+        </a>
+
+        <!-- —— PROJECT CARD: RecRe —— -->
+        <a href="projects/recre.html" class="card" data-animate data-delay="4">
+          <div class="card__image">
+            <div class="img-placeholder" aria-hidden="true">recre · hero image</div>
+            <!-- REPLACE with: <img src="assets/images/projects/recre/card-cover.jpg" alt="RecRe proposal design presentation slides" /> -->
+          </div>
+          <div class="card__body">
+            <span class="card__eyebrow">Proposal Design · [YEAR]</span>
+            <h3 class="card__title">RecRe Proposal Design</h3>
+            <p class="card__desc">Synthesizing research into clear, persuasive design decks for university and public-space proposals.</p>
+            <span class="card__link">View project →</span>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- =====================================================
+       ABOUT PREVIEW STRIP
+       ===================================================== -->
+  <section class="about-strip">
+    <div class="about-strip__inner">
+
+      <!-- REPLACE: swap with your actual headshot -->
+      <div class="about-strip__image" data-animate>
+        <div class="img-placeholder" style="min-height:380px;" aria-hidden="true">headshot placeholder</div>
+        <!-- REPLACE with: <img src="assets/images/about/headshot.jpg" alt="Nina Cralle" /> -->
+      </div>
+
+      <div class="about-strip__content" data-animate data-delay="2">
+        <p class="eyebrow">A little about me</p>
+        <h2>Research-informed. Visually intentional.</h2>
+
+        <!-- REPLACE: customize this bio to your voice -->
+        <p>
+          I'm a senior Interactive Design student at JMU with a focus on UX/UI and product design.
+          I care deeply about designing for real people — especially those whose needs are often overlooked.
+          Accessibility isn't a checklist to me; it's a starting point.
+        </p>
+
+        <p>
+          Outside of design, I'm drawn to type, art direction, and figuring out how the smallest
+          design decisions shape how people feel about a product.
+        </p>
+
+        <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 0.5rem;">
+          <a href="about.html" class="btn btn--outline">More about me</a>
+          <!-- REPLACE: update href to your actual resume PDF path -->
+          <a href="assets/resume/nina-cralle-resume.pdf" class="btn btn--ghost" target="_blank" rel="noopener">Resume ↗</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- =====================================================
+       CONTACT CTA STRIP
+       ===================================================== -->
+  <section class="cta-strip">
+    <div class="container">
+      <h2 data-animate>Let's work together.</h2>
+      <!-- REPLACE: update email address -->
+      <p data-animate data-delay="1">Open to internships, entry-level opportunities, and collaborations in UX/UI and product design.</p>
+      <div data-animate data-delay="2" style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
+        <a href="contact.html" class="btn btn--outline">Get in touch</a>
+        <!-- REPLACE: update LinkedIn URL -->
+        <a href="https://linkedin.com/in/ninacralle" class="btn btn--ghost" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.7);">LinkedIn ↗</a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- =====================================================
+       FOOTER
+       ===================================================== -->
+  <footer class="footer">
+    <div class="footer__inner">
+      <span class="footer__name">Nina Cralle</span>
+      <nav class="footer__links" aria-label="Footer navigation">
+        <a href="projects.html">Projects</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <!-- REPLACE: update LinkedIn URL -->
+        <a href="https://linkedin.com/in/ninacralle" target="_blank" rel="noopener">LinkedIn ↗</a>
+      </nav>
+      <p class="footer__copy">© 2026 Nina Cralle. All rights reserved.</p>
+    </div>
+  </footer>
+
+
+  <!-- Script -->
+  <script src="js/script.js"></script>
+</body>
+</html>
