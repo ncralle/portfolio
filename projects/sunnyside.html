@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Sunnyside Communities — a UX case study by Nina Cralle. Senior-friendly web prototype." />
+  <title>Sunnyside Communities — Nina Cralle</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/styles.css" />
+</head>
+<body>
+
+  <!-- NAVIGATION -->
+  <nav class="nav" role="navigation" aria-label="Main navigation">
+    <div class="nav__inner">
+      <a href="../index.html" class="nav__logo">Nina Cralle</a>
+      <ul class="nav__links" role="list">
+        <li><a href="../projects.html" class="active">Projects</a></li>
+        <li><a href="../about.html">About</a></li>
+        <li><a href="../contact.html">Contact</a></li>
+      </ul>
+      <button class="nav__toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+  <div class="nav__mobile" aria-hidden="true">
+    <a href="../projects.html">Projects</a>
+    <a href="../about.html">About</a>
+    <a href="../contact.html">Contact</a>
+  </div>
+
+
+  <!-- PROJECT HERO -->
+  <section class="project-hero">
+    <div class="project-hero__inner">
+      <a href="../projects.html" class="project-back">All projects</a>
+
+      <div class="project-hero__meta" data-animate>
+        <span class="project-meta-tag accent">Web Design</span>
+        <span class="project-meta-tag">·</span>
+        <!-- REPLACE: year -->
+        <span class="project-meta-tag">[YEAR]</span>
+        <span class="project-meta-tag">·</span>
+        <span class="project-meta-tag">Client-Based Academic Project</span>
+      </div>
+
+      <h1 class="project-hero__title" data-animate data-delay="1">Sunnyside Communities</h1>
+
+      <p class="project-hero__subtitle" data-animate data-delay="2">
+        Designing a digital experience for senior residents — focused on accessibility,
+        outdoor learning, and community connection.
+      </p>
+
+      <!-- REPLACE: hero image -->
+      <div class="project-hero__image" data-animate data-delay="3">
+        <div class="img-placeholder project-img project-img--hero" aria-hidden="true">
+          hero image — Sunnyside prototype screenshot or device mockup
+        </div>
+        <!-- REPLACE with:
+          <img
+            src="../assets/images/projects/sunnyside/hero.jpg"
+            alt="Sunnyside Communities web prototype shown on a laptop browser"
+            class="project-img project-img--hero"
+          />
+        -->
+      </div>
+    </div>
+  </section>
+
+
+  <!-- PROJECT CONTENT -->
+  <main class="project-content">
+
+
+    <!-- OVERVIEW -->
+    <section class="project-section" data-animate>
+      <div class="project-section__label">
+        <span class="eyebrow">Overview</span>
+      </div>
+      <p class="wide dark">
+        Sunnyside Communities is a client-based academic project in which I designed a digital experience
+        for senior residents focused on accessibility and outdoor learning. The prototype was built using
+        HTML and CSS (Replit).
+      </p>
+      <p style="margin-top:0.75rem;">[ADD FINAL COPY — add any additional context about the client, scope, or team.]</p>
+    </section>
+
+    <hr class="divider" />
+
+
+    <!-- PROBLEM -->
+    <section class="project-section" data-animate>
+      <div class="project-section__label">
+        <span class="eyebrow">Problem</span>
+      </div>
+      <h2>[ADD FINAL COPY — problem headline for Sunnyside]</h2>
+      <p>[ADD FINAL COPY — describe the challenge: who was the audience, what were their needs, and what was missing?]</p>
+
+      <div style="margin-top: 1.5rem;">
+        <div class="img-placeholder project-img" style="min-height:220px;" aria-hidden="true">
+          problem context visual — audience insight or current state screenshot
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+
+    <!-- MY ROLE -->
+    <section class="project-section" data-animate>
+      <div class="project-section__label">
+        <span class="eyebrow">My Role</span>
+      </div>
+      <h2>Designer & Developer</h2>
+      <p>
+        I designed and built the prototype, working directly with the client brief. My responsibilities
+        included [ADD FINAL COPY — list your specific contributions: wireframing, visual design, coding, client communication?].
+      </p>
+
+      <!-- Accessibility focus callout -->
+      <div style="margin-top:1.5rem; padding:1.25rem 1.5rem; background:var(--color-card); border-radius:var(--radius-md);">
+        <p class="eyebrow" style="margin-bottom:0.4rem;">Accessibility focus</p>
+        <p class="dark wide" style="max-width:none;">
+          Designing for senior users required careful attention to text size, color contrast, navigation
+          simplicity, and reducing cognitive load. [ADD FINAL COPY — describe specific accessibility decisions you made.]
+        </p>
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+
+    <!-- SOLUTION -->
+    <section class="project-section" data-animate>
+      <div class="project-section__label">
+        <span class="eyebrow">Solution</span>
+      </div>
+      <h2>[ADD FINAL COPY — solution headline]</h2>
+      <p>[ADD FINAL COPY — describe the final design. What did you build? What did it include?]</p>
+
+      <!-- Key screens -->
+      <div class="process-row" style="margin-top:1.5rem;">
+        <div>
+          <div class="img-placeholder project-img" style="min-height:200px;" aria-hidden="true">screen 1</div>
+          <p class="caption" style="margin-top:0.5rem; text-align:center;">[Screen label]</p>
+        </div>
+        <div>
+          <div class="img-placeholder project-img" style="min-height:200px;" aria-hidden="true">screen 2</div>
+          <p class="caption" style="margin-top:0.5rem; text-align:center;">[Screen label]</p>
+        </div>
+        <div>
+          <div class="img-placeholder project-img" style="min-height:200px;" aria-hidden="true">screen 3</div>
+          <p class="caption" style="margin-top:0.5rem; text-align:center;">[Screen label]</p>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+
+    <!-- REFLECTION -->
+    <section class="project-section" data-animate>
+      <div class="project-section__label">
+        <span class="eyebrow">Reflection</span>
+      </div>
+      <h2>What I took away.</h2>
+
+      <div class="reflection-block">
+        <p>"[ADD FINAL COPY — your reflection on this project: what worked, what you learned, what you'd revisit.]"</p>
+      </div>
+    </section>
+
+
+  </main>
+
+
+  <!-- PROJECT NAVIGATION -->
+  <nav class="project-nav" aria-label="Project navigation">
+    <div class="project-nav__inner">
+      <a href="cookmate.html" class="project-nav__link">
+        <span class="project-nav__label">← Previous</span>
+        <span class="project-nav__title">CookMate</span>
+      </a>
+      <a href="recre.html" class="project-nav__link project-nav__link--next">
+        <span class="project-nav__label">Next project</span>
+        <span class="project-nav__title">RecRe Proposal Design →</span>
+      </a>
+    </div>
+  </nav>
+
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer__inner">
+      <span class="footer__name">Nina Cralle</span>
+      <nav class="footer__links" aria-label="Footer navigation">
+        <a href="../projects.html">Projects</a>
+        <a href="../about.html">About</a>
+        <a href="../contact.html">Contact</a>
+        <a href="https://linkedin.com/in/ninacralle" target="_blank" rel="noopener">LinkedIn ↗</a>
+      </nav>
+      <p class="footer__copy">© 2026 Nina Cralle. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="../js/script.js"></script>
+</body>
+</html>
