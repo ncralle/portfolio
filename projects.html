@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Nina Cralle's UX/UI design projects — MyAbility, CookMate, Sunnyside, RecRe, and more." />
+  <title>Projects — Nina Cralle</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <!-- NAVIGATION -->
+  <nav class="nav" role="navigation" aria-label="Main navigation">
+    <div class="nav__inner">
+      <a href="index.html" class="nav__logo">Nina Cralle</a>
+      <ul class="nav__links" role="list">
+        <li><a href="projects.html" class="active">Projects</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <button class="nav__toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+  <div class="nav__mobile" aria-hidden="true">
+    <a href="projects.html">Projects</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+  </div>
+
+
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <div class="page-hero__inner">
+      <p class="eyebrow" style="margin-bottom:1rem;" data-animate>Selected Work</p>
+      <h1 data-animate data-delay="1">Projects</h1>
+      <p style="margin-top:1rem; max-width:52ch;" data-animate data-delay="2">
+        A curated collection of UX, product, and visual design work — focused on research,
+        accessibility, and purposeful execution.
+      </p>
+    </div>
+  </section>
+
+
+  <!-- PROJECTS GRID -->
+  <section class="projects-grid">
+    <div class="projects-grid__inner">
+      <div class="projects-grid__layout">
+
+        <!-- ——————————————————————————————————————
+             FEATURED CARD: MyAbility (spans full width)
+             ——————————————————————————————————————— -->
+        <a href="projects/myability.html" class="card card--featured" data-animate>
+          <div class="card__image">
+            <div class="img-placeholder" aria-hidden="true">myability · hero image</div>
+            <!-- REPLACE with:
+              <img src="assets/images/projects/myability/card-cover.jpg"
+                   alt="MyAbility app screens showing resource discovery and filtering interface" />
+            -->
+          </div>
+          <div class="card__body">
+            <span class="card__eyebrow">UX Design · 2026</span>
+            <h2 class="card__title" style="font-size:2rem;">MyAbility</h2>
+            <p class="card__desc" style="margin-top:0.5rem;">
+              Helping students with mobility disabilities find healthcare, resources, and community support
+              in one centralized, accessible mobile app. Research-driven, tested with real users.
+            </p>
+            <div class="card__badge" style="margin-top:0.75rem;">🥈 Silver — AEJMC Festival of Visual & Interactive Media</div>
+            <ul class="skills-list" style="margin-top:1rem;">
+              <li class="skill-tag">User Research</li>
+              <li class="skill-tag">Wireframing</li>
+              <li class="skill-tag">Prototyping</li>
+              <li class="skill-tag">Usability Testing</li>
+              <li class="skill-tag">Accessibility</li>
+            </ul>
+            <span class="card__link" style="margin-top:1.5rem;">View case study →</span>
+          </div>
+        </a>
+
+        <!-- CookMate -->
+        <a href="projects/cookmate.html" class="card" data-animate data-delay="1">
+          <div class="card__image">
+            <div class="img-placeholder" aria-hidden="true">cookmate · hero image</div>
+            <!-- REPLACE with:
+              <img src="assets/images/projects/cookmate/card-cover.jpg"
+                   alt="CookMate mobile app interface showing recipe browser" />
+            -->
+          </div>
+          <div class="card__body">
+            <span class="card__eyebrow">UX / Mobile Design · [YEAR]</span>
+            <h3 class="card__title">CookMate</h3>
+            <p class="card__desc">A mobile app concept that simplifies cooking by organizing recipes, ingredients, and steps in one usable flow.</p>
+            <ul class="skills-list" style="margin-top:0.75rem;">
+              <li class="skill-tag">User Research</li>
+              <li class="skill-tag">Mobile UX</li>
+              <li class="skill-tag">Prototyping</li>
+            </ul>
+            <span class="card__link">View case study →</span>
+          </div>
+        </a>
+
+        <!-- Sunnyside -->
+        <a href="projects/sunnyside.html" class="card" data-animate data-delay="2">
+          <div class="card__image">
+            <div class="img-placeholder" aria-hidden="true">sunnyside · hero image</div>
+            <!-- REPLACE with:
+              <img src="assets/images/projects/sunnyside/card-cover.jpg"
+                   alt="Sunnyside Communities prototype showing accessible outdoor learning interface" />
+            -->
+          </div>
+          <div class="card__body">
+            <span class="card__eyebrow">Web Design · [YEAR]</span>
+            <h3 class="card__title">Sunnyside Communities</h3>
+            <p class="card__desc">A senior-accessible web prototype for outdoor learning and community connection, built for a real client.</p>
+            <ul class="skills-list" style="margin-top:0.75rem;">
+              <li class="skill-tag">Accessibility</li>
+              <li class="skill-tag">HTML / CSS</li>
+              <li class="skill-tag">Client Work</li>
+            </ul>
+            <span class="card__link">View case study →</span>
+          </div>
+        </a>
+
+        <!-- RecRe -->
+        <a href="projects/recre.html" class="card" data-animate data-delay="1">
+          <div class="card__image">
+            <div class="img-placeholder" aria-hidden="true">recre · hero image</div>
+            <!-- REPLACE with:
+              <img src="assets/images/projects/recre/card-cover.jpg"
+                   alt="RecRe proposal design presentation spread" />
+            -->
+          </div>
+          <div class="card__body">
+            <span class="card__eyebrow">Proposal Design · [YEAR]</span>
+            <h3 class="card__title">RecRe Proposal Design</h3>
+            <p class="card__desc">Designing persuasive presentations and synthesizing research into visual communications for university proposals.</p>
+            <ul class="skills-list" style="margin-top:0.75rem;">
+              <li class="skill-tag">Visual Design</li>
+              <li class="skill-tag">Presentation</li>
+              <li class="skill-tag">Communication</li>
+            </ul>
+            <span class="card__link">View project →</span>
+          </div>
+        </a>
+
+        <!-- Sakura Café -->
+        <a href="projects/sakura.html" class="card" data-animate data-delay="2">
+          <div class="card__image">
+            <div class="img-placeholder" aria-hidden="true">sakura café · hero image</div>
+            <!-- REPLACE with:
+              <img src="assets/images/projects/sakura/card-cover.jpg"
+                   alt="Sakura Café branding and website concept visuals" />
+            -->
+          </div>
+          <div class="card__body">
+            <span class="card__eyebrow">Branding / Visual Design · [YEAR]</span>
+            <h3 class="card__title">Sakura Café</h3>
+            <p class="card__desc">A branding and web design concept rooted in Japanese aesthetics — focused on visual identity, layout, and storytelling.</p>
+            <ul class="skills-list" style="margin-top:0.75rem;">
+              <li class="skill-tag">Branding</li>
+              <li class="skill-tag">Web Design</li>
+              <li class="skill-tag">Visual Identity</li>
+            </ul>
+            <span class="card__link">View project →</span>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer__inner">
+      <span class="footer__name">Nina Cralle</span>
+      <nav class="footer__links" aria-label="Footer navigation">
+        <a href="projects.html">Projects</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <a href="https://linkedin.com/in/ninacralle" target="_blank" rel="noopener">LinkedIn ↗</a>
+      </nav>
+      <p class="footer__copy">© 2026 Nina Cralle. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
