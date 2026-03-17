@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="About Nina Cralle — Interactive Design student at JMU focused on UX/UI, accessibility, and human-centered design." />
+  <title>About — Nina Cralle</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <!-- NAVIGATION -->
+  <nav class="nav" role="navigation" aria-label="Main navigation">
+    <div class="nav__inner">
+      <a href="index.html" class="nav__logo">Nina Cralle</a>
+      <ul class="nav__links" role="list">
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="about.html" class="active">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <button class="nav__toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+  <div class="nav__mobile" aria-hidden="true">
+    <a href="projects.html">Projects</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+  </div>
+
+
+  <!-- PAGE HERO -->
+  <section class="about-hero">
+    <div class="container">
+      <p class="eyebrow" style="margin-bottom:1rem;" data-animate>About</p>
+      <h1 data-animate data-delay="1">Nina Cralle</h1>
+      <p style="margin-top:1rem; max-width:52ch; font-size:1.125rem;" data-animate data-delay="2">
+        Interactive Design student at James Madison University.
+        UX/UI designer. Accessibility advocate. Thoughtful by default.
+      </p>
+    </div>
+  </section>
+
+
+  <!-- ABOUT GRID: photo + text -->
+  <section class="section">
+    <div class="container">
+      <div class="about-grid">
+
+        <!-- Headshot column -->
+        <div class="about-photo" data-animate>
+          <!-- REPLACE: swap with your actual headshot -->
+          <div class="img-placeholder" style="min-height:420px;" aria-hidden="true">
+            headshot placeholder
+          </div>
+          <!-- REPLACE with:
+            <img
+              src="assets/images/about/headshot.jpg"
+              alt="Nina Cralle — portrait photo"
+            />
+          -->
+        </div>
+
+        <!-- Text column -->
+        <div class="about-text">
+
+          <!-- Bio -->
+          <div data-animate>
+            <p class="eyebrow" style="margin-bottom:0.75rem;">Background</p>
+            <!-- REPLACE: customize this paragraph to your own voice -->
+            <p>
+              I'm a senior Interactive Design student at James Madison University, focused on UX/UI
+              and product design. My work lives at the intersection of research, accessibility, and
+              visual craft — I care about creating experiences that don't just look good, but actually
+              work for the people using them.
+            </p>
+            <p style="margin-top:0.75rem;">
+              Accessibility isn't an afterthought in my process — it's a starting point. I've designed
+              for users with mobility disabilities, seniors, and everyday people navigating complex tasks,
+              and that range has shaped how I think about every design decision.
+            </p>
+            <!-- REPLACE: add additional personal details, interests, or background -->
+            <p style="margin-top:0.75rem;">
+              [ADD FINAL COPY — optional: mention what drew you to design, an interest outside of work,
+              or something personal that reflects your perspective as a designer.]
+            </p>
+          </div>
+
+          <hr class="divider" />
+
+          <!-- Education -->
+          <div data-animate data-delay="1">
+            <p class="eyebrow" style="margin-bottom:0.75rem;">Education</p>
+            <h3 style="font-size:1.25rem;">James Madison University</h3>
+            <p>B.S. in Interactive Design</p>
+            <!-- REPLACE: add your expected graduation date -->
+            <p>[Expected graduation: Month YEAR]</p>
+          </div>
+
+          <hr class="divider" />
+
+          <!-- Tools & Skills -->
+          <div data-animate data-delay="2">
+            <p class="eyebrow" style="margin-bottom:0.75rem;">Tools & Skills</p>
+            <!-- REPLACE: add/remove tags to match your actual skills -->
+            <ul class="skills-list" role="list">
+              <li class="skill-tag">Figma</li>
+              <li class="skill-tag">UX Research</li>
+              <li class="skill-tag">Wireframing</li>
+              <li class="skill-tag">Prototyping</li>
+              <li class="skill-tag">Usability Testing</li>
+              <li class="skill-tag">Accessibility</li>
+              <li class="skill-tag">HTML / CSS</li>
+              <li class="skill-tag">Visual Design</li>
+              <li class="skill-tag">Typography</li>
+              <li class="skill-tag">Adobe Creative Suite</li>
+              <!-- REPLACE: add any additional tools you use -->
+              <li class="skill-tag">[Add your tools here]</li>
+            </ul>
+          </div>
+
+          <hr class="divider" />
+
+          <!-- Recognition -->
+          <div data-animate data-delay="3">
+            <p class="eyebrow" style="margin-bottom:0.75rem;">Recognition</p>
+            <div style="display:flex; align-items:flex-start; gap:0.75rem;">
+              <span style="font-size:1.25rem;">🥈</span>
+              <div>
+                <p class="dark" style="font-weight:500; max-width:none;">Silver Award — AEJMC Festival of Visual & Interactive Media</p>
+                <p class="caption" style="margin-top:0.2rem;">2026 · MyAbility — Interactive Design category</p>
+              </div>
+            </div>
+            <!-- REPLACE: add any additional awards, honors, or recognition -->
+          </div>
+
+          <hr class="divider" />
+
+          <!-- Resume / CTA -->
+          <div data-animate data-delay="4" style="display:flex; gap:1rem; flex-wrap:wrap;">
+            <!-- REPLACE: update href to your actual resume PDF -->
+            <a href="assets/resume/nina-cralle-resume.pdf" class="btn btn--primary" target="_blank" rel="noopener">
+              Download Resume
+            </a>
+            <a href="contact.html" class="btn btn--outline">Get in touch</a>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer__inner">
+      <span class="footer__name">Nina Cralle</span>
+      <nav class="footer__links" aria-label="Footer navigation">
+        <a href="projects.html">Projects</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <!-- REPLACE: update LinkedIn URL -->
+        <a href="https://linkedin.com/in/ninacralle" target="_blank" rel="noopener">LinkedIn ↗</a>
+      </nav>
+      <p class="footer__copy">© 2026 Nina Cralle. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
