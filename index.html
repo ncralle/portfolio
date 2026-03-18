@@ -49,34 +49,119 @@
   </div>
 
 
-  <!-- =====================================================
-       HERO
-       ===================================================== -->
-  <section class="hero">
-    <div class="hero__inner">
+<!-- =====================================================
+     HERO — name as focal point
+     ===================================================== -->
+<section class="hero hero--centered">
+  <div class="hero__inner hero__inner--centered">
 
-      <div class="hero__eyebrow" data-animate>
-        <span class="eyebrow">UX / Product Design</span>
-      </div>
+    <p class="hero__discipline" data-animate>UX / Product Design</p>
 
-      <!-- REPLACE: Adjust value statement as needed -->
-      <h1 class="display hero__headline" data-animate data-delay="1">
-        Making the complex<br/>
-        <em>feel simple.</em>
-      </h1>
+    <h1 class="hero__name" data-animate data-delay="1">
+      Nina<br><em>Cralle</em>
+    </h1>
 
-      <!-- REPLACE: Refine this intro sentence to match your voice -->
-      <p class="hero__sub" data-animate data-delay="2">
-        Senior Interactive Design student at JMU, focused on UX/UI and accessibility. I like figuring out why something is hard to use — and fixing it.
-      </p>
+    <p class="hero__sub hero__sub--centered" data-animate data-delay="2">
+      Interactive designer focused on UX/UI and human-centered systems.
+    </p>
 
-      <div class="hero__cta" data-animate data-delay="3">
-        <a href="projects.html" class="btn btn--primary">View my work</a>
-        <a href="about.html" class="btn btn--outline">About me</a>
-      </div>
-
+    <div class="hero__cta hero__cta--centered" data-animate data-delay="3">
+      <a href="projects.html" class="btn btn--primary">View my work</a>
+      <a href="about.html" class="btn btn--outline">About me</a>
     </div>
-  </section>
+
+  </div>
+</section>
+
+
+<!-- =====================================================
+     PROJECT CAROUSEL
+     Drag or scroll horizontally to browse all projects.
+     REPLACE each .img-placeholder with a real <img> tag
+     when you have assets — see comments on each item.
+     ===================================================== -->
+<section class="carousel-section" aria-label="Project previews">
+  <div class="carousel-track-wrap">
+    <ul class="carousel-track" id="carouselTrack" role="list">
+
+      <!-- MyAbility -->
+      <li class="carousel-item">
+        <a href="projects/myability.html" class="carousel-link">
+          <div class="carousel-thumb">
+            <div class="img-placeholder carousel-thumb__img" aria-hidden="true">myability</div>
+            <!-- REPLACE with:
+              <img src="assets/images/projects/myability/card-cover.jpg"
+                   alt="MyAbility app" class="carousel-thumb__img" />
+            -->
+          </div>
+          <span class="carousel-label">MyAbility</span>
+          <span class="carousel-type">UX Design</span>
+        </a>
+      </li>
+
+      <!-- CookMate -->
+      <li class="carousel-item">
+        <a href="projects/cookmate.html" class="carousel-link">
+          <div class="carousel-thumb">
+            <div class="img-placeholder carousel-thumb__img" aria-hidden="true">cookmate</div>
+            <!-- REPLACE with:
+              <img src="assets/images/projects/cookmate/card-cover.jpg"
+                   alt="CookMate app" class="carousel-thumb__img" />
+            -->
+          </div>
+          <span class="carousel-label">CookMate</span>
+          <span class="carousel-type">Mobile Design</span>
+        </a>
+      </li>
+
+      <!-- Sunnyside -->
+      <li class="carousel-item">
+        <a href="projects/sunnyside.html" class="carousel-link">
+          <div class="carousel-thumb">
+            <div class="img-placeholder carousel-thumb__img" aria-hidden="true">sunnyside</div>
+            <!-- REPLACE with:
+              <img src="assets/images/projects/sunnyside/card-cover.jpg"
+                   alt="Sunnyside Communities" class="carousel-thumb__img" />
+            -->
+          </div>
+          <span class="carousel-label">Sunnyside</span>
+          <span class="carousel-type">Web Design</span>
+        </a>
+      </li>
+
+      <!-- RecRe -->
+      <li class="carousel-item">
+        <a href="projects/recre.html" class="carousel-link">
+          <div class="carousel-thumb">
+            <div class="img-placeholder carousel-thumb__img" aria-hidden="true">recre</div>
+            <!-- REPLACE with:
+              <img src="assets/images/projects/recre/card-cover.jpg"
+                   alt="RecRe Proposal" class="carousel-thumb__img" />
+            -->
+          </div>
+          <span class="carousel-label">RecRe</span>
+          <span class="carousel-type">Proposal Design</span>
+        </a>
+      </li>
+
+      <!-- Sakura Café -->
+      <li class="carousel-item">
+        <a href="projects/sakura.html" class="carousel-link">
+          <div class="carousel-thumb">
+            <div class="img-placeholder carousel-thumb__img" aria-hidden="true">sakura</div>
+            <!-- REPLACE with:
+              <img src="assets/images/projects/sakura/card-cover.jpg"
+                   alt="Sakura Café" class="carousel-thumb__img" />
+            -->
+          </div>
+          <span class="carousel-label">Sakura Café</span>
+          <span class="carousel-type">Branding</span>
+        </a>
+      </li>
+
+    </ul>
+  </div>
+</section>
 
 
   <!-- =====================================================
