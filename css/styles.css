@@ -1509,3 +1509,117 @@ body { padding-top: var(--nav-height); }
     padding-inline: var(--space-sm);
   }
 }
+
+/* ============================================================
+   SKETCH FONT + OVAL CAROUSEL REFRESH
+   Paste at the very bottom of styles.css — overrides previous
+   refresh block where needed
+   ============================================================ */
+
+
+/* — Hero name: Rye sketch font, full-width single line — */
+
+.hero__name {
+  font-family: 'Rye', Georgia, serif;
+  font-weight: 400;              /* Rye only has one weight */
+  font-size: clamp(4rem, 11.5vw, 13rem);
+  line-height: 0.95;
+  letter-spacing: -0.01em;      /* tighter than default for Rye */
+  color: var(--color-text);
+  margin-bottom: 2rem;
+  /* Remove italic rule — Rye has no italic, name is one line now */
+  font-style: normal;
+}
+
+/* Rye has no italic variant — remove the em styling */
+.hero__name em {
+  font-style: normal;
+  color: inherit;
+}
+
+
+/* — Carousel: oval thumbnails, larger, partially off-screen — */
+
+/* Stretch the track padding so items bleed to viewport edges */
+.carousel-track-wrap {
+  padding-inline: clamp(1rem, 4vw, 3rem);  /* less padding = more bleed */
+}
+
+.carousel-track {
+  gap: 1.75rem;
+  align-items: center;
+  padding-block: 2rem;           /* vertical breathing room for ovals */
+}
+
+/* Oval / portrait pill shape */
+.carousel-thumb {
+  width:  clamp(140px, 14vw, 200px);
+  height: clamp(185px, 18vw, 260px);   /* taller than wide = oval */
+  border-radius: 999px;                 /* pill — fully rounded ends */
+  background-color: var(--color-card);
+  border: 1.5px solid var(--color-border);
+  overflow: hidden;
+  transition: transform 0.32s ease, border-color 0.32s ease, box-shadow 0.32s ease;
+  flex-shrink: 0;
+}
+
+.carousel-link:hover .carousel-thumb {
+  transform: scale(1.05) translateY(-4px);
+  border-color: var(--color-accent);
+  box-shadow: 0 12px 36px rgba(176, 122, 82, 0.18);
+}
+
+/* Image fills the oval */
+.carousel-thumb__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0;
+  min-height: unset;
+  font-size: 0.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  letter-spacing: 0.06em;
+}
+
+/* Label below oval: use Rye for a touch of the sketch personality */
+.carousel-label {
+  font-family: 'Rye', Georgia, serif;
+  font-size: 0.9375rem;
+  font-weight: 400;
+  color: var(--color-text);
+  margin-top: 0.875rem;
+}
+
+.carousel-type {
+  font-size: 0.625rem;
+  letter-spacing: 0.12em;
+  margin-top: 0.2rem;
+}
+
+/* Carousel section: white bg, generous top/bottom space */
+.carousel-section {
+  padding-block: var(--space-md) var(--space-lg);
+  background-color: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+}
+
+
+/* — Mobile — */
+
+@media (max-width: 600px) {
+  .hero__name {
+    font-size: clamp(3rem, 18vw, 5rem);
+    line-height: 1.0;
+  }
+
+  .carousel-thumb {
+    width:  110px;
+    height: 145px;
+  }
+
+  .carousel-track {
+    gap: 1.25rem;
+  }
+}
