@@ -1283,3 +1283,229 @@ body { padding-top: var(--nav-height); }
     text-align: left;
   }
 }
+
+/* ============================================================
+   VISUAL REFRESH — paste at bottom of styles.css
+   Changes: hero layout, name typography, carousel,
+            button refinements, editorial type hierarchy
+   ============================================================ */
+
+
+/* — Button refinements: more editorial, less startup — */
+
+.btn {
+  border-radius: 0;           /* flat edge, not rounded */
+  letter-spacing: 0.08em;
+  font-size: 0.8125rem;
+  padding: 0.7rem 1.5rem;
+}
+
+.btn--primary {
+  background-color: var(--color-text);
+}
+
+.btn--outline {
+  border-width: 1px;
+}
+
+
+/* — Hero: centered name-focal layout — */
+
+.hero--centered {
+  padding-top: var(--space-xl);
+  padding-bottom: var(--space-lg);
+  border-bottom: 1px solid var(--color-border);
+  text-align: center;
+}
+
+.hero__inner--centered {
+  max-width: 800px;
+  margin-inline: auto;
+  padding-inline: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+/* Small discipline label above the name */
+.hero__discipline {
+  font-family: var(--font-body);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  margin-bottom: 1.5rem;
+}
+
+/* The name — massive, expressive, centered */
+.hero__name {
+  font-family: var(--font-display);
+  font-size: clamp(5rem, 16vw, 13rem);
+  font-weight: 500;
+  line-height: 0.92;
+  letter-spacing: -0.03em;
+  color: var(--color-text);
+  margin-bottom: 1.75rem;
+}
+
+/* "Cralle" is italicized — contrast against "Nina" */
+.hero__name em {
+  font-style: italic;
+  color: var(--color-text);   /* same color — contrast is weight/angle, not hue */
+}
+
+/* Centered subline — trim to one line */
+.hero__sub--centered {
+  font-size: 1rem;
+  color: var(--color-muted);
+  max-width: 44ch;
+  text-align: center;
+  line-height: 1.55;
+  margin-bottom: 2rem;
+}
+
+/* Centered CTA row */
+.hero__cta--centered {
+  justify-content: center;
+}
+
+
+/* — Carousel — */
+
+.carousel-section {
+  padding-block: var(--space-lg);
+  border-bottom: 1px solid var(--color-border);
+  /* Slight background shift to separate it from hero */
+  background-color: var(--color-surface);
+}
+
+.carousel-track-wrap {
+  overflow-x: auto;
+  overflow-y: hidden;
+  /* Hide scrollbar visually — still scrollable */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  cursor: grab;
+  /* Padding on sides so first/last items aren't flush */
+  padding-inline: clamp(var(--space-md), 5vw, var(--space-xl));
+}
+
+.carousel-track-wrap::-webkit-scrollbar { display: none; }
+.carousel-track-wrap.dragging { cursor: grabbing; }
+
+.carousel-track {
+  display: flex;
+  gap: 2.5rem;
+  align-items: flex-start;
+  /* Prevent wrapping — force horizontal */
+  white-space: nowrap;
+  width: max-content;
+  padding-bottom: 0.5rem; /* room for label */
+}
+
+/* Each project item */
+.carousel-item {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  white-space: normal;    /* re-enable wrapping inside each item */
+  flex-shrink: 0;
+}
+
+.carousel-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.625rem;
+  text-decoration: none;
+  color: var(--color-text);
+}
+
+/* Circular thumbnail */
+.carousel-thumb {
+  width: clamp(120px, 15vw, 180px);
+  height: clamp(120px, 15vw, 180px);
+  border-radius: 50%;
+  overflow: hidden;
+  background-color: var(--color-card);
+  border: 1.5px solid var(--color-border);
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  flex-shrink: 0;
+}
+
+.carousel-link:hover .carousel-thumb {
+  transform: scale(1.06);
+  border-color: var(--color-accent);
+  box-shadow: 0 8px 32px rgba(176, 122, 82, 0.15);
+}
+
+/* Image inside the circle */
+.carousel-thumb__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0;       /* parent clips it to circle */
+  min-height: unset;      /* override .img-placeholder default */
+  font-size: 0.625rem;    /* placeholder text tiny */
+}
+
+/* Project name below circle */
+.carousel-label {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--color-text);
+  text-align: center;
+  transition: color 0.25s ease;
+  line-height: 1.2;
+}
+
+.carousel-link:hover .carousel-label { color: var(--color-accent); }
+
+/* Category tag below label */
+.carousel-type {
+  font-family: var(--font-body);
+  font-size: 0.6875rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  text-align: center;
+}
+
+
+/* — Typography hierarchy: sharper display vs body contrast — */
+
+/* Tighten the about strip h2 */
+.about-strip__content h2 {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  line-height: 1.2;
+}
+
+/* Subtler section labels (eyebrow text throughout) */
+.eyebrow {
+  letter-spacing: 0.14em;
+  font-size: 0.6875rem;
+}
+
+
+/* — Responsive: carousel + hero on mobile — */
+
+@media (max-width: 600px) {
+  .hero__name {
+    font-size: clamp(4rem, 22vw, 6rem);
+    line-height: 0.9;
+  }
+
+  .carousel-thumb {
+    width: 100px;
+    height: 100px;
+  }
+
+  .carousel-track {
+    gap: 1.5rem;
+    padding-inline: var(--space-sm);
+  }
+}
