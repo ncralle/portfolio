@@ -100,3 +100,52 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
 });
+
+/* —— Drag-to-scroll carousel —— */
+(function () {
+  const wrap = document.getElementById('carouselTrack')?.parentElement;
+  if (!wrap) return;
+
+  let isDown = false;
+  let startX;
+  let scrollLeft;
+
+  wrap.addEventListener('mousedown', (e) => {
+    isDown = true;
+    wrap.classList.add('dragging');
+    startX     = e.pageX - wrap.offsetLeft;
+    scrollLeft = wrap.scrollLeft;
+  });
+
+  wrap.addEventListener('mouseleave', () => {
+    isDown = false;
+    wrap.classList.remove('dragging');
+  });
+
+  wrap.addEventListener('mouseup', () => {
+    isDown = false;
+    wrap.classList.remove('dragging');
+  });
+
+  wrap.addEventListener('mousemove', (e) => {
+    if (!isDown) return;
+    e.preventDefault();
+    const x    = e.pageX - wrap.offsetLeft;
+    const walk = (x - startX) * 1.4; /* 1.4 = drag speed multiplier */
+    wrap.scrollLeft = scrollLeft - walk;
+  });
+
+  /* Touch support */
+  let touchStartX = 0;
+  let touchScrollLeft = 0;
+
+  wrap.addEventListener('touchstart', (e) => {
+    touchStartX    = e.touches[0].pageX;
+    touchScrollLeft = wrap.scrollLeft;
+  }, { passive: true });
+
+  wrap.addEventListener('touchmove', (e) => {
+    const dx = touchStartX - e.touches[0].pageX;
+    wrap.scrollLeft = touchScrollLeft + dx;
+  }, { passive: true });
+})();
