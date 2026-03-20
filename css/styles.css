@@ -1536,3 +1536,278 @@ body { padding-top: var(--nav-height); }
   .hero-arrow--left  { left: 0.4rem; }
   .hero-arrow--right { right: 0.4rem; }
 }
+
+/* ============================================================
+   HERO OVERRIDES — paste at very bottom of styles.css
+   Replaces all previous hero-stacked / carousel blocks
+   ============================================================ */
+
+/* ── Section wrapper ── */
+.hero-stacked {
+  padding-top: clamp(2rem, 5vw, 3.5rem);
+  padding-bottom: 0;
+  border-bottom: 1px solid var(--color-border);
+  background-color: var(--color-bg);
+  overflow: hidden;
+}
+
+/* ── Text block ── */
+.hero-stacked__text {
+  text-align: center;
+  padding-inline: var(--space-md);
+  padding-bottom: 1.5rem;
+}
+
+.hero-stacked__eyebrow {
+  font-family: var(--font-body);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  margin-bottom: 0.5rem;
+}
+
+/*
+  NAME — fills the full viewport width on one line.
+  font-size uses a viewport-relative value so it always stays single-row.
+  The clamp floor (2.5rem) keeps it readable on very small phones.
+*/
+.hero-stacked__name {
+  font-family: 'Fredericka the Great', Georgia, serif;
+  font-weight: 400;
+  /* 18.5vw puts "Nina Cralle" edge-to-edge on a 1400px screen */
+  font-size: clamp(2.5rem, 18.5vw, 14rem);
+  line-height: 0.95;
+  letter-spacing: -0.015em;
+  color: var(--color-text);
+  white-space: nowrap;
+  margin-bottom: 0.75rem;
+}
+
+.hero-stacked__sub {
+  font-size: 1.0625rem;
+  color: var(--color-muted);
+  max-width: 48ch;
+  margin-inline: auto;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+/* Underlined "Featured Projects" link */
+.hero-stacked__link {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-text);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 1px;
+  letter-spacing: 0.02em;
+  transition: color var(--ease);
+  margin-bottom: 0;
+}
+
+.hero-stacked__link:hover { color: var(--color-accent); }
+
+
+/* ── Carousel row ── */
+.hero-carousel-row {
+  position: relative;
+  /* Slight negative top margin pulls ovals up, closer to name */
+  margin-top: 0;
+}
+
+.hero-carousel-scroll {
+  overflow-x: auto;
+  overflow-y: visible;   /* let ovals breathe above/below */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  cursor: grab;
+  /* Edge fade — ovals bleed off left and right edges */
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 3%,
+    black 97%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 3%,
+    black 97%,
+    transparent 100%
+  );
+}
+
+.hero-carousel-scroll::-webkit-scrollbar { display: none; }
+.hero-carousel-scroll.dragging { cursor: grabbing; }
+
+.hero-carousel-track {
+  display: flex;
+  align-items: center;    /* vertically center ovals — no bottom-align */
+  gap: 1rem;
+  width: max-content;
+  /* Very small inline padding so first/last oval can bleed off the edge */
+  padding-inline: 1vw;
+  padding-top: 1.25rem;
+  padding-bottom: 2rem;
+}
+
+/* ── Oval item ── */
+.hero-c-item {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  color: var(--color-text);
+}
+
+/*
+  Bigger ovals — closer to the reference screenshot.
+  Reference shows ovals that are roughly 170–210px wide, 230–280px tall.
+*/
+.hero-c-thumb {
+  width:  clamp(130px, 13vw, 195px);
+  height: clamp(172px, 17vw, 258px);
+  border-radius: 999px;
+  overflow: hidden;
+  background-color: var(--color-card);
+  border: 1.5px solid var(--color-border);
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  flex-shrink: 0;
+}
+
+.hero-c-item:hover .hero-c-thumb {
+  transform: translateY(-7px) scale(1.04);
+  border-color: var(--color-accent);
+  box-shadow: 0 16px 40px rgba(176, 122, 82, 0.16);
+}
+
+.hero-c-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.hero-c-label {
+  font-family: 'Fredericka the Great', Georgia, serif;
+  font-size: 0.8125rem;
+  color: var(--color-text);
+  text-align: center;
+  line-height: 1.2;
+  transition: color 0.25s ease;
+  max-width: 130px;
+}
+
+.hero-c-item:hover .hero-c-label { color: var(--color-accent); }
+
+.hero-c-type {
+  font-size: 0.5625rem;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  text-align: center;
+  margin-top: -0.2rem;
+}
+
+
+/* ── Arrows ── */
+.hero-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-60%);
+  z-index: 20;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid var(--color-border);
+  background-color: rgba(248, 246, 242, 0.85);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  color: var(--color-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 0.75rem;
+  opacity: 0.8;
+  transition: opacity 0.2s ease, border-color 0.2s ease,
+              color 0.2s ease, transform 0.2s ease;
+}
+
+.hero-arrow:hover {
+  opacity: 1;
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+  transform: translateY(-60%) scale(1.1);
+}
+
+/* Keep arrows at viewport edges, outside the oval bleed zone */
+.hero-arrow--left  { left: 0.75rem; }
+.hero-arrow--right { right: 0.75rem; }
+
+.hero-arrow.hidden { opacity: 0 !important; pointer-events: none; }
+
+
+/* ── Down chevron ── */
+.hero-chevron {
+  display: flex;
+  justify-content: center;
+  padding-block: 0.75rem 1.25rem;
+  color: var(--color-muted);
+  font-size: 1.125rem;
+  animation: heroChevronBounce 2.2s ease-in-out infinite;
+}
+
+@keyframes heroChevronBounce {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(5px); }
+}
+
+
+/* ── Responsive ── */
+@media (max-width: 1100px) {
+  .hero-stacked__name {
+    /* Allow slight size reduction on mid-size screens */
+    font-size: clamp(2.5rem, 17vw, 11rem);
+  }
+}
+
+@media (max-width: 700px) {
+  .hero-stacked__name {
+    font-size: clamp(2rem, 16vw, 6rem);
+    white-space: nowrap;
+  }
+
+  .hero-c-thumb {
+    width: 105px;
+    height: 138px;
+  }
+
+  .hero-carousel-track {
+    gap: 0.75rem;
+    padding-inline: 0.5vw;
+  }
+
+  .hero-arrow { width: 28px; height: 28px; font-size: 0.6rem; }
+  .hero-arrow--left  { left: 0.35rem; }
+  .hero-arrow--right { right: 0.35rem; }
+}
+
+@media (max-width: 400px) {
+  .hero-stacked__name {
+    font-size: clamp(1.75rem, 14vw, 3.5rem);
+  }
+
+  .hero-c-thumb {
+    width: 85px;
+    height: 112px;
+  }
+}
+
