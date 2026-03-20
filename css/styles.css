@@ -1520,7 +1520,7 @@ body { padding-top: var(--nav-height); }
 /* — Hero name: Rye sketch font, full-width single line — */
 
 .hero__name {
-  font-family: 'Federica the Great', Georgia, serif;
+  font-family: 'Fredericka the Great', Georgia, serif;
   font-weight: 400;              /* Rye only has one weight */
   font-size: clamp(4rem, 11.5vw, 13rem);
   line-height: 0.95;
@@ -1585,7 +1585,7 @@ body { padding-top: var(--nav-height); }
 
 /* Label below oval: use Rye for a touch of the sketch personality */
 .carousel-label {
-  font-family: 'Federica the Great', Georgia, serif;
+  font-family: 'Fredericka the Great', Georgia, serif;
   font-size: 0.9375rem;
   font-weight: 400;
   color: var(--color-text);
