@@ -1285,150 +1285,127 @@ body { padding-top: var(--nav-height); }
 }
 
 /* ============================================================
-   VISUAL REFRESH — paste at bottom of styles.css
-   Changes: hero layout, name typography, carousel,
-            button refinements, editorial type hierarchy
+   HERO — stacked layout
    ============================================================ */
 
-
-/* — Button refinements: more editorial, less startup — */
-
-.btn {
-  border-radius: 0;           /* flat edge, not rounded */
-  letter-spacing: 0.08em;
-  font-size: 0.8125rem;
-  padding: 0.7rem 1.5rem;
-}
-
-.btn--primary {
-  background-color: var(--color-text);
-}
-
-.btn--outline {
-  border-width: 1px;
-}
-
-
-/* — Hero: centered name-focal layout — */
-
-.hero--centered {
-  padding-top: var(--space-xl);
-  padding-bottom: var(--space-lg);
+.hero-stacked {
+  padding-top: var(--space-lg);
+  padding-bottom: 0;
   border-bottom: 1px solid var(--color-border);
+  background-color: var(--color-bg);
+  overflow: hidden;
+}
+
+.hero-stacked__text {
   text-align: center;
-}
-
-.hero__inner--centered {
-  max-width: 800px;
-  margin-inline: auto;
   padding-inline: var(--space-md);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0;
+  padding-bottom: var(--space-md);
 }
 
-/* Small discipline label above the name */
-.hero__discipline {
+.hero-stacked__eyebrow {
   font-family: var(--font-body);
   font-size: 0.6875rem;
   font-weight: 500;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--color-muted);
-  margin-bottom: 1.5rem;
+  margin-bottom: 0.75rem;
 }
 
-/* The name — massive, expressive, centered */
-.hero__name {
-  font-family: var(--font-display);
-  font-size: clamp(5rem, 16vw, 13rem);
-  font-weight: 500;
-  line-height: 0.92;
-  letter-spacing: -0.03em;
+.hero-stacked__name {
+  font-family: 'Fredericka the Great', Georgia, serif;
+  font-weight: 400;
+  font-size: clamp(3rem, 14vw, 10rem);
+  line-height: 1.0;
+  letter-spacing: -0.01em;
   color: var(--color-text);
-  margin-bottom: 1.75rem;
+  white-space: nowrap;
+  margin-bottom: 1rem;
 }
 
-/* "Cralle" is italicized — contrast against "Nina" */
-.hero__name em {
-  font-style: italic;
-  color: var(--color-text);   /* same color — contrast is weight/angle, not hue */
-}
-
-/* Centered subline — trim to one line */
-.hero__sub--centered {
-  font-size: 1rem;
+.hero-stacked__sub {
+  font-size: 1.0625rem;
   color: var(--color-muted);
   max-width: 44ch;
-  text-align: center;
-  line-height: 1.55;
-  margin-bottom: 2rem;
+  margin-inline: auto;
+  line-height: 1.6;
+  margin-bottom: 1.25rem;
 }
 
-/* Centered CTA row */
-.hero__cta--centered {
-  justify-content: center;
+.hero-stacked__link {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-text);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 1px;
+  letter-spacing: 0.02em;
+  transition: color var(--ease);
+  margin-bottom: 2.25rem;
 }
 
+.hero-stacked__link:hover { color: var(--color-accent); }
 
-/* — Carousel — */
 
-.carousel-section {
-  padding-block: var(--space-lg);
-  border-bottom: 1px solid var(--color-border);
-  /* Slight background shift to separate it from hero */
-  background-color: var(--color-surface);
+/* ============================================================
+   HERO CAROUSEL
+   ============================================================ */
+
+.hero-carousel-row {
+  position: relative;
 }
 
-.carousel-track-wrap {
+.hero-carousel-scroll {
   overflow-x: auto;
   overflow-y: hidden;
-  /* Hide scrollbar visually — still scrollable */
   scrollbar-width: none;
   -ms-overflow-style: none;
   cursor: grab;
-  /* Padding on sides so first/last items aren't flush */
-  padding-inline: clamp(var(--space-md), 5vw, var(--space-xl));
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 5%,
+    black 95%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 5%,
+    black 95%,
+    transparent 100%
+  );
 }
 
-.carousel-track-wrap::-webkit-scrollbar { display: none; }
-.carousel-track-wrap.dragging { cursor: grabbing; }
+.hero-carousel-scroll::-webkit-scrollbar { display: none; }
+.hero-carousel-scroll.dragging { cursor: grabbing; }
 
-.carousel-track {
+.hero-carousel-track {
   display: flex;
-  gap: 2.5rem;
-  align-items: flex-start;
-  /* Prevent wrapping — force horizontal */
-  white-space: nowrap;
+  align-items: flex-end;
+  gap: 1.25rem;
   width: max-content;
-  padding-bottom: 0.5rem; /* room for label */
+  padding-inline: 4vw;
+  padding-top: 1rem;
+  padding-bottom: 2.75rem;
 }
 
-/* Each project item */
-.carousel-item {
-  display: inline-flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.75rem;
-  white-space: normal;    /* re-enable wrapping inside each item */
+.hero-c-item {
   flex-shrink: 0;
-}
-
-.carousel-link {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.625rem;
+  gap: 0.6rem;
   text-decoration: none;
   color: var(--color-text);
 }
 
-/* Circular thumbnail */
-.carousel-thumb {
-  width: clamp(120px, 15vw, 180px);
-  height: clamp(120px, 15vw, 180px);
-  border-radius: 50%;
+.hero-c-thumb {
+  width:  clamp(110px, 10vw, 155px);
+  height: clamp(145px, 13vw, 205px);
+  border-radius: 999px;
   overflow: hidden;
   background-color: var(--color-card);
   border: 1.5px solid var(--color-border);
@@ -1436,190 +1413,126 @@ body { padding-top: var(--nav-height); }
   flex-shrink: 0;
 }
 
-.carousel-link:hover .carousel-thumb {
-  transform: scale(1.06);
+.hero-c-item:hover .hero-c-thumb {
+  transform: translateY(-6px) scale(1.04);
   border-color: var(--color-accent);
-  box-shadow: 0 8px 32px rgba(176, 122, 82, 0.15);
+  box-shadow: 0 14px 36px rgba(176, 122, 82, 0.16);
 }
 
-/* Image inside the circle */
-.carousel-thumb__img {
+.hero-c-thumb img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: 0;       /* parent clips it to circle */
-  min-height: unset;      /* override .img-placeholder default */
-  font-size: 0.625rem;    /* placeholder text tiny */
+  display: block;
 }
 
-/* Project name below circle */
-.carousel-label {
-  font-family: var(--font-display);
-  font-size: 1rem;
-  font-weight: 500;
+.hero-c-label {
+  font-family: 'Fredericka the Great', Georgia, serif;
+  font-size: 0.8125rem;
   color: var(--color-text);
   text-align: center;
-  transition: color 0.25s ease;
   line-height: 1.2;
+  transition: color 0.25s ease;
+  max-width: 120px;
 }
 
-.carousel-link:hover .carousel-label { color: var(--color-accent); }
+.hero-c-item:hover .hero-c-label { color: var(--color-accent); }
 
-/* Category tag below label */
-.carousel-type {
-  font-family: var(--font-body);
-  font-size: 0.6875rem;
-  letter-spacing: 0.08em;
+.hero-c-type {
+  font-size: 0.5625rem;
+  letter-spacing: 0.13em;
   text-transform: uppercase;
   color: var(--color-muted);
   text-align: center;
+  margin-top: -0.25rem;
 }
 
-
-/* — Typography hierarchy: sharper display vs body contrast — */
-
-/* Tighten the about strip h2 */
-.about-strip__content h2 {
-  font-size: clamp(1.5rem, 3vw, 2rem);
-  line-height: 1.2;
-}
-
-/* Subtler section labels (eyebrow text throughout) */
-.eyebrow {
-  letter-spacing: 0.14em;
-  font-size: 0.6875rem;
-}
-
-
-/* — Responsive: carousel + hero on mobile — */
-
-@media (max-width: 600px) {
-  .hero__name {
-    font-size: clamp(4rem, 22vw, 6rem);
-    line-height: 0.9;
-  }
-
-  .carousel-thumb {
-    width: 100px;
-    height: 100px;
-  }
-
-  .carousel-track {
-    gap: 1.5rem;
-    padding-inline: var(--space-sm);
-  }
-}
 
 /* ============================================================
-   SKETCH FONT + OVAL CAROUSEL REFRESH
-   Paste at the very bottom of styles.css — overrides previous
-   refresh block where needed
+   CAROUSEL ARROWS + CHEVRON
    ============================================================ */
 
-
-/* — Hero name: Rye sketch font, full-width single line — */
-
-.hero__name {
-  font-family: 'Fredericka the Great', Georgia, serif;
-  font-weight: 400;              /* Rye only has one weight */
-  font-size: clamp(4rem, 11.5vw, 13rem);
-  line-height: 0.95;
-  letter-spacing: -0.01em;      /* tighter than default for Rye */
-  color: var(--color-text);
-  margin-bottom: 2rem;
-  /* Remove italic rule — Rye has no italic, name is one line now */
-  font-style: normal;
-}
-
-/* Rye has no italic variant — remove the em styling */
-.hero__name em {
-  font-style: normal;
-  color: inherit;
-}
-
-
-/* — Carousel: oval thumbnails, larger, partially off-screen — */
-
-/* Stretch the track padding so items bleed to viewport edges */
-.carousel-track-wrap {
-  padding-inline: clamp(1rem, 4vw, 3rem);  /* less padding = more bleed */
-}
-
-.carousel-track {
-  gap: 1.75rem;
-  align-items: center;
-  padding-block: 2rem;           /* vertical breathing room for ovals */
-}
-
-/* Oval / portrait pill shape */
-.carousel-thumb {
-  width:  clamp(140px, 14vw, 200px);
-  height: clamp(185px, 18vw, 260px);   /* taller than wide = oval */
-  border-radius: 999px;                 /* pill — fully rounded ends */
-  background-color: var(--color-card);
-  border: 1.5px solid var(--color-border);
-  overflow: hidden;
-  transition: transform 0.32s ease, border-color 0.32s ease, box-shadow 0.32s ease;
-  flex-shrink: 0;
-}
-
-.carousel-link:hover .carousel-thumb {
-  transform: scale(1.05) translateY(-4px);
-  border-color: var(--color-accent);
-  box-shadow: 0 12px 36px rgba(176, 122, 82, 0.18);
-}
-
-/* Image fills the oval */
-.carousel-thumb__img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 0;
-  min-height: unset;
-  font-size: 0.6rem;
+.hero-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-70%);
+  z-index: 20;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid var(--color-border);
+  background-color: rgba(248, 246, 242, 0.82);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  color: var(--color-muted);
   display: flex;
   align-items: center;
   justify-content: center;
-  letter-spacing: 0.06em;
+  cursor: pointer;
+  font-size: 0.75rem;
+  opacity: 0.75;
+  transition: opacity 0.2s ease, border-color 0.2s ease,
+              color 0.2s ease, transform 0.2s ease;
 }
 
-/* Label below oval: use Rye for a touch of the sketch personality */
-.carousel-label {
-  font-family: 'Fredericka the Great', Georgia, serif;
-  font-size: 0.9375rem;
-  font-weight: 400;
-  color: var(--color-text);
-  margin-top: 0.875rem;
+.hero-arrow:hover {
+  opacity: 1;
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+  transform: translateY(-70%) scale(1.1);
 }
 
-.carousel-type {
-  font-size: 0.625rem;
-  letter-spacing: 0.12em;
-  margin-top: 0.2rem;
+.hero-arrow--left  { left: 1rem; }
+.hero-arrow--right { right: 1rem; }
+.hero-arrow.hidden { opacity: 0 !important; pointer-events: none; }
+
+.hero-chevron {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 1.5rem;
+  color: var(--color-muted);
+  font-size: 1.125rem;
+  animation: bounce 2s ease-in-out infinite;
 }
 
-/* Carousel section: white bg, generous top/bottom space */
-.carousel-section {
-  padding-block: var(--space-md) var(--space-lg);
-  background-color: var(--color-surface);
-  border-bottom: 1px solid var(--color-border);
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(5px); }
 }
 
 
-/* — Mobile — */
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 900px) {
+  .hero-stacked__name {
+    font-size: clamp(2.5rem, 12vw, 7rem);
+  }
+}
 
 @media (max-width: 600px) {
-  .hero__name {
-    font-size: clamp(3rem, 18vw, 5rem);
-    line-height: 1.0;
+  .hero-stacked__name {
+    font-size: clamp(2rem, 15vw, 4rem);
+    white-space: normal;
   }
 
-  .carousel-thumb {
-    width:  110px;
-    height: 145px;
+  .hero-c-thumb {
+    width: 88px;
+    height: 116px;
   }
 
-  .carousel-track {
-    gap: 1.25rem;
+  .hero-carousel-track {
+    gap: 0.875rem;
+    padding-inline: 2.5vw;
   }
+
+  .hero-arrow {
+    width: 28px;
+    height: 28px;
+    font-size: 0.65rem;
+  }
+
+  .hero-arrow--left  { left: 0.4rem; }
+  .hero-arrow--right { right: 0.4rem; }
 }
