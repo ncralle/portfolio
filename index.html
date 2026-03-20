@@ -13,186 +13,142 @@
 
   <style>
     /* ============================================================
-       HERO SECTION — COMBINED NAME + CAROUSEL
+       HERO — stacked layout (name → subtitle → link → carousel)
        ============================================================ */
 
-    .hero-combined {
-      position: relative;
-      height: calc(100vh - var(--nav-height));
-      min-height: 520px;
-      max-height: 900px;
-      overflow: hidden;
-      background-color: var(--color-bg);
+    .hero-stacked {
+      padding-top: var(--space-lg);
+      padding-bottom: 0;
       border-bottom: 1px solid var(--color-border);
+      background-color: var(--color-bg);
+      overflow: hidden;
     }
 
-    /* ── Name Block — always centered, always on top ── */
-    .hero-name-block {
-      position: absolute;
-      inset: 0;
-      z-index: 30;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
+    /* ── Top text block ── */
+    .hero-stacked__text {
       text-align: center;
-      pointer-events: none;
+      padding-inline: var(--space-md);
+      padding-bottom: var(--space-md);
     }
 
-    /* Re-enable clicks on interactive children */
-    .hero-name-block .btn,
-    .hero-name-block a {
-      pointer-events: auto;
-    }
-
-    .hero__discipline {
+    .hero-stacked__eyebrow {
       font-family: var(--font-body);
       font-size: 0.6875rem;
       font-weight: 500;
       letter-spacing: 0.2em;
       text-transform: uppercase;
       color: var(--color-muted);
+      margin-bottom: 0.75rem;
+    }
+
+    /* One-line name — scales down until it fits on a single row */
+    .hero-stacked__name {
+      font-family: 'Fredericka the Great', Georgia, serif;
+      font-weight: 400;
+      /* clamp: won't go below 3rem, tries to fill ~14vw, won't exceed 10rem */
+      font-size: clamp(3rem, 14vw, 10rem);
+      line-height: 1.0;
+      letter-spacing: -0.01em;
+      color: var(--color-text);
+      white-space: nowrap;       /* force single line */
+      margin-bottom: 1rem;
+    }
+
+    .hero-stacked__sub {
+      font-size: 1.0625rem;
+      color: var(--color-muted);
+      max-width: 44ch;
+      margin-inline: auto;
+      line-height: 1.6;
       margin-bottom: 1.25rem;
     }
 
-    .hero__name--sketch {
-      font-family: 'Fredericka the Great', Georgia, serif;
-      font-weight: 400;
-      font-size: clamp(5rem, 13vw, 11rem);
-      line-height: 0.93;
-      letter-spacing: -0.01em;
+    /* "Featured Projects" underline link */
+    .hero-stacked__link {
+      display: inline-block;
+      font-family: var(--font-body);
+      font-size: 0.875rem;
+      font-weight: 500;
       color: var(--color-text);
-      margin-bottom: 1.75rem;
-      font-style: normal;
-      /*
-        Soft bg halo so name stays crisp over oval images.
-        Uses the cream background colour in text-shadow — no box, no blur overlay.
-      */
-      text-shadow:
-        0 0 80px var(--color-bg),
-        0 0 60px var(--color-bg),
-        0 0 40px var(--color-bg),
-        0 0 20px var(--color-bg);
+      text-decoration: underline;
+      text-underline-offset: 4px;
+      text-decoration-thickness: 1px;
+      letter-spacing: 0.02em;
+      transition: color var(--ease);
+      margin-bottom: 2.25rem;
     }
 
-    .hero__sub--center {
-      font-size: 1rem;
-      color: var(--color-muted);
-      max-width: 40ch;
-      text-align: center;
-      line-height: 1.6;
-      margin-bottom: 1.75rem;
+    .hero-stacked__link:hover { color: var(--color-accent); }
+
+
+    /* ── Carousel row ── */
+    .hero-carousel-row {
+      position: relative;
     }
 
-    .hero__cta--centered {
-      display: flex;
-      gap: 0.75rem;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-
-
-    /* ── Carousel layer — scrolls behind the name ── */
-    .hero-carousel-wrap {
-      position: absolute;
-      inset: 0;
-      z-index: 10;
+    /* Scrollable track */
+    .hero-carousel-scroll {
       overflow-x: auto;
       overflow-y: hidden;
       scrollbar-width: none;
       -ms-overflow-style: none;
-      display: flex;
-      align-items: center;
       cursor: grab;
-
-      /*
-        THE OMBRE MASK
-        ─────────────
-        Items fade in from the left/right edges, are fully visible
-        in the side bands, then dissolve to transparent as they
-        approach the center ~36% where "Nina Cralle" lives.
-
-        Left band visible: 18% – 32%
-        Fade out toward center: 32% – 41%
-        Transparent center: 41% – 59%
-        Fade back in: 59% – 68%
-        Right band visible: 68% – 82%
-      */
+      /* Fade edges so ovals bleed cleanly */
       -webkit-mask-image: linear-gradient(
         to right,
-        transparent  0%,
-        transparent  4%,
-        black        18%,
-        black        32%,
-        transparent  41%,
-        transparent  59%,
-        black        68%,
-        black        82%,
-        transparent  96%,
-        transparent  100%
+        transparent 0%,
+        black 5%,
+        black 95%,
+        transparent 100%
       );
       mask-image: linear-gradient(
         to right,
-        transparent  0%,
-        transparent  4%,
-        black        18%,
-        black        32%,
-        transparent  41%,
-        transparent  59%,
-        black        68%,
-        black        82%,
-        transparent  96%,
-        transparent  100%
+        transparent 0%,
+        black 5%,
+        black 95%,
+        transparent 100%
       );
     }
 
-    .hero-carousel-wrap::-webkit-scrollbar { display: none; }
-    .hero-carousel-wrap.dragging { cursor: grabbing; }
+    .hero-carousel-scroll::-webkit-scrollbar { display: none; }
+    .hero-carousel-scroll.dragging { cursor: grabbing; }
 
     .hero-carousel-track {
       display: flex;
-      align-items: center;
-      gap: 1.75rem;
-      padding-block: 2.5rem;
+      align-items: flex-end;   /* bottom-align so labels sit on same baseline */
+      gap: 1.25rem;
       width: max-content;
-      padding-left:  6vw;
-      padding-right: 6vw;
+      padding-inline: 4vw;
+      padding-top: 1rem;
+      padding-bottom: 2.75rem; /* space for label below oval */
     }
 
-    /* Transparent spacer holding the name's visual footprint */
-    .hero-name-spacer {
-      flex: 0 0 clamp(280px, 33vw, 480px);
-      height: 1px;               /* just a width placeholder, no height needed */
-      flex-shrink: 0;
-      pointer-events: none;
-    }
-
-    /* ── Each oval item ── */
+    /* Each oval item */
     .hero-c-item {
       flex-shrink: 0;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 0.625rem;
+      gap: 0.6rem;
       text-decoration: none;
       color: var(--color-text);
     }
 
     .hero-c-thumb {
-      width:  clamp(120px, 11vw, 168px);
-      height: clamp(158px, 15vw, 222px);
+      width:  clamp(110px, 10vw, 155px);
+      height: clamp(145px, 13vw, 205px);
       border-radius: 999px;
       overflow: hidden;
       background-color: var(--color-card);
       border: 1.5px solid var(--color-border);
-      transition: transform 0.32s ease, border-color 0.32s ease, box-shadow 0.32s ease;
+      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
       flex-shrink: 0;
     }
 
     .hero-c-item:hover .hero-c-thumb {
-      transform: scale(1.05) translateY(-5px);
+      transform: translateY(-6px) scale(1.04);
       border-color: var(--color-accent);
-      box-shadow: 0 12px 36px rgba(176, 122, 82, 0.18);
+      box-shadow: 0 14px 36px rgba(176, 122, 82, 0.16);
     }
 
     .hero-c-thumb img {
@@ -209,34 +165,33 @@
       text-align: center;
       line-height: 1.2;
       transition: color 0.25s ease;
-      max-width: 110px;
+      max-width: 120px;
     }
 
     .hero-c-item:hover .hero-c-label { color: var(--color-accent); }
 
     .hero-c-type {
       font-size: 0.5625rem;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.13em;
       text-transform: uppercase;
       color: var(--color-muted);
       text-align: center;
-      margin-top: -0.2rem;
+      margin-top: -0.25rem;
     }
 
-
-    /* ── Scroll Arrows ── */
+    /* ── Scroll arrows ── */
     .hero-arrow {
       position: absolute;
       top: 50%;
-      transform: translateY(-50%);
-      z-index: 40;
-      width: 36px;
-      height: 36px;
+      transform: translateY(-70%);   /* slightly above center of ovals */
+      z-index: 20;
+      width: 34px;
+      height: 34px;
       border-radius: 50%;
       border: 1px solid var(--color-border);
-      background-color: rgba(248, 246, 242, 0.75);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
+      background-color: rgba(248, 246, 242, 0.82);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
       color: var(--color-muted);
       display: flex;
       align-items: center;
@@ -244,25 +199,36 @@
       cursor: pointer;
       font-size: 0.75rem;
       line-height: 1;
-      opacity: 0.7;
-      transition: opacity 0.25s ease, border-color 0.25s ease,
-                  color 0.25s ease, transform 0.2s ease;
+      opacity: 0.75;
+      transition: opacity 0.2s ease, border-color 0.2s ease,
+                  color 0.2s ease, transform 0.2s ease;
     }
 
     .hero-arrow:hover {
       opacity: 1;
       border-color: var(--color-accent);
       color: var(--color-accent);
-      transform: translateY(-50%) scale(1.1);
+      transform: translateY(-70%) scale(1.1);
     }
 
-    .hero-arrow--left  { left: 1.25rem; }
-    .hero-arrow--right { right: 1.25rem; }
+    .hero-arrow--left  { left: 1rem; }
+    .hero-arrow--right { right: 1rem; }
 
-    /* JS toggles this to hide arrows at scroll limits */
-    .hero-arrow.hidden {
-      opacity: 0 !important;
-      pointer-events: none;
+    .hero-arrow.hidden { opacity: 0 !important; pointer-events: none; }
+
+    /* ── Down chevron ── */
+    .hero-chevron {
+      display: flex;
+      justify-content: center;
+      padding-bottom: 1.5rem;
+      color: var(--color-muted);
+      font-size: 1.125rem;
+      animation: bounce 2s ease-in-out infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(5px); }
     }
 
 
@@ -270,81 +236,29 @@
        RESPONSIVE
        ============================================================ */
     @media (max-width: 900px) {
-      .hero-carousel-wrap {
-        -webkit-mask-image: linear-gradient(
-          to right,
-          transparent 0%,
-          black 14%,
-          black 28%,
-          transparent 38%,
-          transparent 62%,
-          black 72%,
-          black 86%,
-          transparent 100%
-        );
-        mask-image: linear-gradient(
-          to right,
-          transparent 0%,
-          black 14%,
-          black 28%,
-          transparent 38%,
-          transparent 62%,
-          black 72%,
-          black 86%,
-          transparent 100%
-        );
+      .hero-stacked__name {
+        font-size: clamp(2.5rem, 12vw, 7rem);
       }
     }
 
     @media (max-width: 600px) {
-      .hero-combined {
-        max-height: 700px;
-        min-height: 480px;
+      .hero-stacked__name {
+        font-size: clamp(2rem, 15vw, 4rem);
       }
-
-      .hero__name--sketch {
-        font-size: clamp(3.5rem, 20vw, 5rem);
-        line-height: 0.95;
-        margin-bottom: 1.25rem;
-      }
-
-      .hero__sub--center { font-size: 0.9rem; }
 
       .hero-c-thumb {
-        width: 90px;
-        height: 119px;
+        width: 88px;
+        height: 116px;
       }
 
-      .hero-carousel-track { gap: 1rem; }
-
-      .hero-carousel-wrap {
-        -webkit-mask-image: linear-gradient(
-          to right,
-          transparent 0%,
-          black 8%,
-          black 22%,
-          transparent 34%,
-          transparent 66%,
-          black 78%,
-          black 92%,
-          transparent 100%
-        );
-        mask-image: linear-gradient(
-          to right,
-          transparent 0%,
-          black 8%,
-          black 22%,
-          transparent 34%,
-          transparent 66%,
-          black 78%,
-          black 92%,
-          transparent 100%
-        );
+      .hero-carousel-track {
+        gap: 0.875rem;
+        padding-inline: 2.5vw;
       }
 
       .hero-arrow { width: 28px; height: 28px; font-size: 0.65rem; }
-      .hero-arrow--left  { left: 0.5rem; }
-      .hero-arrow--right { right: 0.5rem; }
+      .hero-arrow--left  { left: 0.4rem; }
+      .hero-arrow--right { right: 0.4rem; }
     }
   </style>
 </head>
@@ -374,126 +288,125 @@
 
 
   <!-- ============================================================
-       HERO — NAME OVER SCROLLABLE OVAL CAROUSEL
+       HERO — name on one row, carousel below
        ============================================================ -->
-  <section class="hero-combined" aria-label="Hero">
+  <section class="hero-stacked" aria-label="Hero">
 
-    <!-- Scroll hint arrows (outside the masked wrap so they stay fully visible) -->
-    <button class="hero-arrow hero-arrow--left"  id="arrowLeft"  aria-label="Scroll projects left">&#8592;</button>
-    <button class="hero-arrow hero-arrow--right" id="arrowRight" aria-label="Scroll projects right">&#8594;</button>
-
-    <!-- Scrollable oval carousel -->
-    <div class="hero-carousel-wrap" id="heroCWrap">
-      <div class="hero-carousel-track" id="heroCTrack">
-
-        <!-- LEFT ITEMS -->
-        <a href="projects.html" class="hero-c-item" tabindex="-1" aria-hidden="true">
-          <div class="hero-c-thumb">
-            <img src="https://static.wixstatic.com/media/748392_43a09739200b4712ad2594f3e3e9bf42~mv2.jpg/v1/fill/w_525,h_700,q_90,enc_avif,quality_auto/748392_43a09739200b4712ad2594f3e3e9bf42~mv2.jpg" alt="" loading="eager" />
-          </div>
-          <span class="hero-c-label">Gemeischaft</span>
-          <span class="hero-c-type">Print Design</span>
-        </a>
-
-        <a href="projects.html" class="hero-c-item" tabindex="-1" aria-hidden="true">
-          <div class="hero-c-thumb">
-            <img src="https://static.wixstatic.com/media/748392_c0c60c1fc7424899b061f4d5baf2ed8d~mv2.png/v1/fill/w_525,h_700,q_90,enc_avif,quality_auto/748392_c0c60c1fc7424899b061f4d5baf2ed8d~mv2.png" alt="" loading="eager" />
-          </div>
-          <span class="hero-c-label">Sakura Café</span>
-          <span class="hero-c-type">Web Design</span>
-        </a>
-
-        <a href="projects.html" class="hero-c-item" tabindex="-1" aria-hidden="true">
-          <div class="hero-c-thumb">
-            <img src="https://static.wixstatic.com/media/748392_819b16d722b24609b6dbccc500c400a1~mv2.jpg/v1/fill/w_452,h_634,q_90,enc_avif,quality_auto/748392_819b16d722b24609b6dbccc500c400a1~mv2.jpg" alt="" loading="eager" />
-          </div>
-          <span class="hero-c-label">Campus Parking</span>
-          <span class="hero-c-type">Mobile App</span>
-        </a>
-
-        <a href="projects.html" class="hero-c-item" tabindex="-1" aria-hidden="true">
-          <div class="hero-c-thumb">
-            <img src="https://static.wixstatic.com/media/748392_bf07c3f982ab4c2b93ce6afc4eee3a30~mv2.jpg/v1/fill/w_525,h_700,q_90,enc_avif,quality_auto/748392_bf07c3f982ab4c2b93ce6afc4eee3a30~mv2.jpg" alt="" loading="eager" />
-          </div>
-          <span class="hero-c-label">SeaSalt</span>
-          <span class="hero-c-type">Visual Design</span>
-        </a>
-
-        <a href="projects.html" class="hero-c-item" tabindex="-1" aria-hidden="true">
-          <div class="hero-c-thumb">
-            <img src="https://static.wixstatic.com/media/748392_e3b4d288f4ae4a98b5c248c417201b25~mv2.jpg/v1/fill/w_525,h_700,q_90,enc_avif,quality_auto/748392_e3b4d288f4ae4a98b5c248c417201b25~mv2.jpg" alt="" loading="eager" />
-          </div>
-          <span class="hero-c-label">Kitu</span>
-          <span class="hero-c-type">Design</span>
-        </a>
-
-        <!-- CENTER SPACER — width matches the name block so the fade gap aligns -->
-        <div class="hero-name-spacer" id="heroNameSpacer" aria-hidden="true"></div>
-
-        <!-- RIGHT ITEMS -->
-        <a href="projects.html" class="hero-c-item" tabindex="-1" aria-hidden="true">
-          <div class="hero-c-thumb">
-            <img src="https://static.wixstatic.com/media/748392_3ea7407dfeb64e88b7728ffdab41593c~mv2.jpg/v1/fill/w_525,h_700,q_90,enc_avif,quality_auto/748392_3ea7407dfeb64e88b7728ffdab41593c~mv2.jpg" alt="" loading="eager" />
-          </div>
-          <span class="hero-c-label">CookMate</span>
-          <span class="hero-c-type">Mobile App</span>
-        </a>
-
-        <a href="projects.html" class="hero-c-item" tabindex="-1" aria-hidden="true">
-          <div class="hero-c-thumb">
-            <img src="https://static.wixstatic.com/media/748392_2871911ba95944c892058e59d22882a2~mv2.jpg/v1/fill/w_525,h_700,q_90,enc_avif,quality_auto/748392_2871911ba95944c892058e59d22882a2~mv2.jpg" alt="" loading="eager" />
-          </div>
-          <span class="hero-c-label">No Planet B</span>
-          <span class="hero-c-type">Branding</span>
-        </a>
-
-        <a href="projects.html" class="hero-c-item" tabindex="-1" aria-hidden="true">
-          <div class="hero-c-thumb">
-            <img src="https://static.wixstatic.com/media/748392_5e49c0f866f343a69ea00a5a0cd1ce8d~mv2.png/v1/fill/w_525,h_700,q_90,enc_avif,quality_auto/748392_5e49c0f866f343a69ea00a5a0cd1ce8d~mv2.png" alt="" loading="eager" />
-          </div>
-          <span class="hero-c-label">Fitted Cats</span>
-          <span class="hero-c-type">Web Design</span>
-        </a>
-
-        <a href="projects.html" class="hero-c-item" tabindex="-1" aria-hidden="true">
-          <div class="hero-c-thumb">
-            <img src="https://static.wixstatic.com/media/748392_f478317d6dab402b847f70ad79104921~mv2.png/v1/fill/w_525,h_700,q_90,enc_avif,quality_auto/748392_f478317d6dab402b847f70ad79104921~mv2.png" alt="" loading="eager" />
-          </div>
-          <span class="hero-c-label">Klob</span>
-          <span class="hero-c-type">UX / UI</span>
-        </a>
-
-        <a href="projects.html" class="hero-c-item" tabindex="-1" aria-hidden="true">
-          <div class="hero-c-thumb">
-            <img src="https://static.wixstatic.com/media/748392_e35c72f9d48d459695031e0da3b1c4f8~mv2.jpg/v1/fill/w_525,h_700,q_90,enc_avif,quality_auto/748392_e35c72f9d48d459695031e0da3b1c4f8~mv2.jpg" alt="" loading="eager" />
-          </div>
-          <span class="hero-c-label">Arte Artifacts</span>
-          <span class="hero-c-type">Design</span>
-        </a>
-
-        <a href="projects.html" class="hero-c-item" tabindex="-1" aria-hidden="true">
-          <div class="hero-c-thumb">
-            <img src="https://static.wixstatic.com/media/748392_0b7a01a1cb854430a8d0b304a4896f2b~mv2.jpg/v1/fill/w_525,h_700,q_90,enc_avif,quality_auto/748392_0b7a01a1cb854430a8d0b304a4896f2b~mv2.jpg" alt="" loading="eager" />
-          </div>
-          <span class="hero-c-label">Hola</span>
-          <span class="hero-c-type">Design</span>
-        </a>
-
-      </div>
-    </div>
-
-    <!-- Name block — centered over everything -->
-    <div class="hero-name-block">
-      <p class="hero__discipline" data-animate>UX / Product Design</p>
-      <h1 class="hero__name--sketch" data-animate data-delay="1">Nina<br>Cralle</h1>
-      <p class="hero__sub--center" data-animate data-delay="2">
-        Interactive designer focused on UX/UI<br>and human&#8209;centered systems.
+    <!-- Text block -->
+    <div class="hero-stacked__text">
+      <p class="hero-stacked__eyebrow" data-animate>UX / Product Design</p>
+      <h1 class="hero-stacked__name" data-animate data-delay="1">Nina Cralle</h1>
+      <p class="hero-stacked__sub" data-animate data-delay="2">
+        Interactive design &amp; creative writing student<br>at James Madison University.
       </p>
-      <div class="hero__cta--centered" data-animate data-delay="3">
-        <a href="projects.html" class="btn btn--primary">View Work</a>
-        <a href="about.html"    class="btn btn--outline">About Me</a>
-      </div>
+      <a href="projects.html" class="hero-stacked__link" data-animate data-delay="3">
+        Featured Projects
+      </a>
     </div>
+
+    <!-- Oval carousel -->
+    <div class="hero-carousel-row">
+
+      <button class="hero-arrow hero-arrow--left"  id="arrowLeft"  aria-label="Scroll left">&#8592;</button>
+      <button class="hero-arrow hero-arrow--right" id="arrowRight" aria-label="Scroll right">&#8594;</button>
+
+      <div class="hero-carousel-scroll" id="heroCScroll">
+        <div class="hero-carousel-track" id="heroCTrack">
+
+          <a href="projects.html" class="hero-c-item">
+            <div class="hero-c-thumb">
+              <img src="https://static.wixstatic.com/media/748392_2871911ba95944c892058e59d22882a2~mv2.jpg/v1/fill/w_525,h_700,q_90,enc_avif,quality_auto/748392_2871911ba95944c892058e59d22882a2~mv2.jpg" alt="There's No Planet B" loading="eager" />
+            </div>
+            <span class="hero-c-label">No Planet B</span>
+            <span class="hero-c-type">Branding</span>
+          </a>
+
+          <a href="projects.html" class="hero-c-item">
+            <div class="hero-c-thumb">
+              <img src="https://static.wixstatic.com/media/748392_43a09739200b4712ad2594f3e3e9bf42~mv2.jpg/v1/fill/w_525,h_700,q_90,enc_avif,quality_auto/748392_43a09739200b4712ad2594f3e3e9bf42~mv2.jpg" alt="Gemeischaft Home" loading="eager" />
+            </div>
+            <span class="hero-c-label">Gemeischaft</span>
+            <span class="hero-c-type">Print Design</span>
+          </a>
+
+          <a href="projects.html" class="hero-c-item">
+            <div class="hero-c-thumb">
+              <img src="https://static.wixstatic.com/media/748392_819b16d722b24609b6dbccc500c400a1~mv2.jpg/v1/fill/w_452,h_634,q_90,enc_avif,quality_auto/748392_819b16d722b24609b6dbccc500c400a1~mv2.jpg" alt="Campus Parking App" loading="eager" />
+            </div>
+            <span class="hero-c-label">Campus Parking</span>
+            <span class="hero-c-type">Mobile App</span>
+          </a>
+
+          <a href="projects.html" class="hero-c-item">
+            <div class="hero-c-thumb">
+              <img src="https://static.wixstatic.com/media/748392_c0c60c1fc7424899b061f4d5baf2ed8d~mv2.png/v1/fill/w_525,h_700,q_90,enc_avif,quality_auto/748392_c0c60c1fc7424899b061f4d5baf2ed8d~mv2.png" alt="Sakura Café" loading="eager" />
+            </div>
+            <span class="hero-c-label">Sakura Café</span>
+            <span class="hero-c-type">Web Design</span>
+          </a>
+
+          <a href="projects.html" class="hero-c-item">
+            <div class="hero-c-thumb">
+              <img src="https://static.wixstatic.com/media/748392_e35c72f9d48d459695031e0da3b1c4f8~mv2.jpg/v1/fill/w_525,h_700,q_90,enc_avif,quality_auto/748392_e35c72f9d48d459695031e0da3b1c4f8~mv2.jpg" alt="Arte Artifacts" loading="eager" />
+            </div>
+            <span class="hero-c-label">Arte Artifacts</span>
+            <span class="hero-c-type">Design</span>
+          </a>
+
+          <a href="projects.html" class="hero-c-item">
+            <div class="hero-c-thumb">
+              <img src="https://static.wixstatic.com/media/748392_e3b4d288f4ae4a98b5c248c417201b25~mv2.jpg/v1/fill/w_525,h_700,q_90,enc_avif,quality_auto/748392_e3b4d288f4ae4a98b5c248c417201b25~mv2.jpg" alt="Kitu" loading="eager" />
+            </div>
+            <span class="hero-c-label">Kitu</span>
+            <span class="hero-c-type">Design</span>
+          </a>
+
+          <a href="projects.html" class="hero-c-item">
+            <div class="hero-c-thumb">
+              <img src="https://static.wixstatic.com/media/748392_f478317d6dab402b847f70ad79104921~mv2.png/v1/fill/w_525,h_700,q_90,enc_avif,quality_auto/748392_f478317d6dab402b847f70ad79104921~mv2.png" alt="Klob" loading="eager" />
+            </div>
+            <span class="hero-c-label">Klob</span>
+            <span class="hero-c-type">UX / UI</span>
+          </a>
+
+          <a href="projects.html" class="hero-c-item">
+            <div class="hero-c-thumb">
+              <img src="https://static.wixstatic.com/media/748392_3ea7407dfeb64e88b7728ffdab41593c~mv2.jpg/v1/fill/w_525,h_700,q_90,enc_avif,quality_auto/748392_3ea7407dfeb64e88b7728ffdab41593c~mv2.jpg" alt="CookMate App" loading="eager" />
+            </div>
+            <span class="hero-c-label">CookMate</span>
+            <span class="hero-c-type">Mobile App</span>
+          </a>
+
+          <a href="projects.html" class="hero-c-item">
+            <div class="hero-c-thumb">
+              <img src="https://static.wixstatic.com/media/748392_5e49c0f866f343a69ea00a5a0cd1ce8d~mv2.png/v1/fill/w_525,h_700,q_90,enc_avif,quality_auto/748392_5e49c0f866f343a69ea00a5a0cd1ce8d~mv2.png" alt="Fitted Cats" loading="eager" />
+            </div>
+            <span class="hero-c-label">Fitted Cats</span>
+            <span class="hero-c-type">Web Design</span>
+          </a>
+
+          <a href="projects.html" class="hero-c-item">
+            <div class="hero-c-thumb">
+              <img src="https://static.wixstatic.com/media/748392_bf07c3f982ab4c2b93ce6afc4eee3a30~mv2.jpg/v1/fill/w_525,h_700,q_90,enc_avif,quality_auto/748392_bf07c3f982ab4c2b93ce6afc4eee3a30~mv2.jpg" alt="SeaSalt" loading="eager" />
+            </div>
+            <span class="hero-c-label">SeaSalt</span>
+            <span class="hero-c-type">Visual Design</span>
+          </a>
+
+          <a href="projects.html" class="hero-c-item">
+            <div class="hero-c-thumb">
+              <img src="https://static.wixstatic.com/media/748392_0b7a01a1cb854430a8d0b304a4896f2b~mv2.jpg/v1/fill/w_525,h_700,q_90,enc_avif,quality_auto/748392_0b7a01a1cb854430a8d0b304a4896f2b~mv2.jpg" alt="Hola" loading="eager" />
+            </div>
+            <span class="hero-c-label">Hola</span>
+            <span class="hero-c-type">Design</span>
+          </a>
+
+        </div><!-- /track -->
+      </div><!-- /scroll -->
+    </div><!-- /carousel-row -->
+
+    <!-- Down chevron -->
+    <div class="hero-chevron" aria-hidden="true">&#8964;</div>
 
   </section>
 
@@ -501,7 +414,7 @@
   <!-- ============================================================
        FEATURED PROJECTS
        ============================================================ -->
-  <section class="featured section">
+  <section class="featured section" id="featured">
     <div class="container">
       <div class="featured__header">
         <div>
@@ -630,76 +543,63 @@
 
   <script src="js/script.js"></script>
   <script>
-    /* ============================================================
-       HERO CAROUSEL
-       ============================================================ */
     (function () {
-      const wrap   = document.getElementById('heroCWrap');
-      const spacer = document.getElementById('heroNameSpacer');
+      const scroll = document.getElementById('heroCScroll');
       const btnL   = document.getElementById('arrowLeft');
       const btnR   = document.getElementById('arrowRight');
-      if (!wrap || !spacer) return;
+      if (!scroll) return;
 
-      const STEP = 300; // px per arrow press
+      const STEP = 320;
 
-      /* ── Center the spacer (= name zone) on first paint ── */
-      function centerOnSpacer() {
-        const mid   = spacer.offsetLeft + spacer.offsetWidth / 2;
-        wrap.scrollLeft = mid - wrap.clientWidth / 2;
+      /* ── Center carousel on load so it feels balanced ── */
+      function centerTrack() {
+        const maxScroll = scroll.scrollWidth - scroll.clientWidth;
+        scroll.scrollLeft = maxScroll / 2;
         updateArrows();
       }
 
-      requestAnimationFrame(() => requestAnimationFrame(centerOnSpacer));
+      requestAnimationFrame(() => requestAnimationFrame(centerTrack));
 
       let rTimer;
       window.addEventListener('resize', () => {
         clearTimeout(rTimer);
-        rTimer = setTimeout(centerOnSpacer, 120);
+        rTimer = setTimeout(centerTrack, 120);
       });
 
       /* ── Arrow state ── */
       function updateArrows() {
         if (!btnL || !btnR) return;
-        btnL.classList.toggle('hidden', wrap.scrollLeft < 4);
+        btnL.classList.toggle('hidden', scroll.scrollLeft < 4);
         btnR.classList.toggle('hidden',
-          wrap.scrollLeft >= wrap.scrollWidth - wrap.clientWidth - 4);
+          scroll.scrollLeft >= scroll.scrollWidth - scroll.clientWidth - 4);
       }
 
-      wrap.addEventListener('scroll', updateArrows, { passive: true });
+      scroll.addEventListener('scroll', updateArrows, { passive: true });
 
-      /* ── Arrow clicks ── */
-      if (btnL) btnL.addEventListener('click', () =>
-        wrap.scrollBy({ left: -STEP, behavior: 'smooth' }));
-      if (btnR) btnR.addEventListener('click', () =>
-        wrap.scrollBy({ left:  STEP, behavior: 'smooth' }));
+      if (btnL) btnL.addEventListener('click', () => scroll.scrollBy({ left: -STEP, behavior: 'smooth' }));
+      if (btnR) btnR.addEventListener('click', () => scroll.scrollBy({ left:  STEP, behavior: 'smooth' }));
 
       /* ── Mouse drag ── */
       let down = false, startX, startScroll;
 
-      wrap.addEventListener('mousedown', e => {
+      scroll.addEventListener('mousedown', e => {
         down = true;
-        wrap.classList.add('dragging');
-        startX     = e.pageX - wrap.offsetLeft;
-        startScroll = wrap.scrollLeft;
+        scroll.classList.add('dragging');
+        startX      = e.pageX - scroll.offsetLeft;
+        startScroll = scroll.scrollLeft;
       });
-      wrap.addEventListener('mouseleave', () => { down = false; wrap.classList.remove('dragging'); });
-      wrap.addEventListener('mouseup',    () => { down = false; wrap.classList.remove('dragging'); });
-      wrap.addEventListener('mousemove',  e => {
+      scroll.addEventListener('mouseleave', () => { down = false; scroll.classList.remove('dragging'); });
+      scroll.addEventListener('mouseup',    () => { down = false; scroll.classList.remove('dragging'); });
+      scroll.addEventListener('mousemove', e => {
         if (!down) return;
         e.preventDefault();
-        wrap.scrollLeft = startScroll - (e.pageX - wrap.offsetLeft - startX) * 1.5;
+        scroll.scrollLeft = startScroll - (e.pageX - scroll.offsetLeft - startX) * 1.5;
       });
 
       /* ── Touch ── */
       let tx = 0, ts = 0;
-      wrap.addEventListener('touchstart', e => {
-        tx = e.touches[0].pageX;
-        ts = wrap.scrollLeft;
-      }, { passive: true });
-      wrap.addEventListener('touchmove',  e => {
-        wrap.scrollLeft = ts + (tx - e.touches[0].pageX);
-      }, { passive: true });
-
+      scroll.addEventListener('touchstart', e => { tx = e.touches[0].pageX; ts = scroll.scrollLeft; }, { passive: true });
+      scroll.addEventListener('touchmove',  e => { scroll.scrollLeft = ts + (tx - e.touches[0].pageX); }, { passive: true });
     })();
   </script>
 
