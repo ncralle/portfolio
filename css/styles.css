@@ -521,6 +521,13 @@ strong { font-weight: 600; color: var(--color-text); }
 .project-img--sq    { aspect-ratio: 1 / 1; }
 .project-img--hero  { aspect-ratio: 21 / 9; min-height: 320px; }
 
+/* Full image — no crop. Use on project hero images instead of project-img--hero */
+.project-img--full {
+  object-fit: contain;
+  height: auto;
+  aspect-ratio: unset;
+  background-color: transparent;
+}
 
 /* ============================================================
    9. HOMEPAGE
@@ -2031,4 +2038,5 @@ body { padding-top: var(--nav-height); }
     height: 114px;
   }
 }
+
 
