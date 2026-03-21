@@ -1897,7 +1897,7 @@ body { padding-top: var(--nav-height); }
   padding: 0 removes any inset so it truly edge-to-edges.
 */
 .hero-stacked__name {
-  font-size: clamp(2.5rem, 12vw, 8rem);
+  font-size: clamp(3rem, 14vw, 9.5rem);
   line-height: 0.92;
   letter-spacing: -0.02em;
   white-space: nowrap;
