@@ -1811,3 +1811,224 @@ body { padding-top: var(--nav-height); }
   }
 }
 
+/* ============================================================
+   CANVA MATCH OVERRIDES
+   Paste at the very bottom of styles.css.
+   These rules override everything above them.
+   ============================================================ */
+
+
+/* ── 1. SEAMLESS BACKGROUND
+   Remove all visible borders/dividers that create the "boxed" look.
+   The hero and featured section should feel like one open canvas.
+   ─────────────────────────────────────────────────────────── */
+
+/* Kill the border that separates hero from featured */
+.hero-stacked {
+  border-bottom: none;
+  overflow: visible;           /* let ovals breathe outside the block */
+}
+
+/* Featured section: same cream bg, no top border, pulled up
+   so it sits flush against the carousel */
+.featured {
+  background-color: var(--color-bg);
+  border-top: none;
+  padding-top: var(--space-lg);  /* less top padding — feels open not cramped */
+}
+
+/* About strip: restore its separator so the section change is clear */
+.about-strip {
+  border-top: 1px solid var(--color-border);
+}
+
+/* Remove any lingering background from the text block */
+.hero-stacked__text {
+  background: none;
+  box-shadow: none;
+}
+
+/* Remove background from carousel row */
+.hero-carousel-row {
+  background: none;
+  box-shadow: none;
+}
+
+/* The carousel scroll should be invisible — just images floating */
+.hero-carousel-scroll {
+  background: none;
+}
+
+/* Carousel track — no card/surface behind it */
+.hero-carousel-track {
+  background: none;
+}
+
+
+/* ── 2. HERO TEXT — centered, airy, name fills the width
+   ─────────────────────────────────────────────────────────── */
+
+.hero-stacked__text {
+  text-align: center;
+  padding-inline: 0;           /* no horizontal padding — let name breathe */
+  padding-top: clamp(1.5rem, 3vw, 2.5rem);
+  padding-bottom: 1.75rem;
+}
+
+/* Eyebrow: centered, more space below it */
+.hero-stacked__eyebrow {
+  text-align: center;
+  margin-bottom: 0.75rem;
+  letter-spacing: 0.22em;
+}
+
+/*
+  NAME — the single most important change.
+  font-size: 18.5vw makes "Nina Cralle" fill the full viewport width.
+  On a 1440px screen that's ~266px — matching the Canva mock exactly.
+  white-space: nowrap keeps it on one line.
+  padding: 0 removes any inset so it truly edge-to-edges.
+*/
+.hero-stacked__name {
+  font-size: clamp(2.5rem, 18.5vw, 15rem);
+  line-height: 0.92;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+  text-align: center;
+  margin-bottom: 1.25rem;
+  padding: 0;
+}
+
+/* Subtitle: more breathing room above and below */
+.hero-stacked__sub {
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  max-width: 46ch;
+  margin-inline: auto;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+/* "Featured Projects" link: centered, comfortable space below before carousel */
+.hero-stacked__link {
+  display: inline-block;
+  margin-bottom: 0;            /* space comes from carousel track padding instead */
+  letter-spacing: 0.03em;
+}
+
+
+/* ── 3. CAROUSEL — embedded, no container, ovals bleed freely
+   ─────────────────────────────────────────────────────────── */
+
+/* Pull carousel up slightly — closes the gap between link and ovals */
+.hero-carousel-row {
+  margin-top: 1.25rem;
+  padding: 0;
+}
+
+/* Overflow visible so ovals clip off screen edges naturally */
+.hero-carousel-scroll {
+  overflow-x: auto;
+  overflow-y: visible;
+  /* Softer edge fade — ovals bleed almost to viewport edges */
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 2%,
+    black 98%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 2%,
+    black 98%,
+    transparent 100%
+  );
+}
+
+.hero-carousel-track {
+  /* Almost no padding — ovals should bleed off both edges */
+  padding-inline: 0.5vw;
+  padding-top: 0.5rem;
+  padding-bottom: 1.75rem;
+  gap: 0.875rem;               /* slightly tighter — more ovals visible at once */
+  align-items: center;
+}
+
+/*
+  OVAL SIZE — match the Canva mock.
+  In the Canva screenshot ovals are roughly 185px wide × 245px tall.
+  Using vw so they scale proportionally.
+*/
+.hero-c-thumb {
+  width:  clamp(140px, 13.5vw, 200px);
+  height: clamp(185px, 17.5vw, 265px);
+}
+
+/* Label spacing */
+.hero-c-label {
+  margin-top: 0.5rem;
+  font-size: 0.8125rem;
+}
+
+
+/* ── 4. CHEVRON — pull it up, less gap after carousel
+   ─────────────────────────────────────────────────────────── */
+
+.hero-chevron {
+  padding-block: 0.5rem 1rem;
+  margin-top: -0.5rem;
+}
+
+
+/* ── 5. FEATURED SECTION — flows from hero seamlessly
+   ─────────────────────────────────────────────────────────── */
+
+/* Container max-width stays, but remove any visible bg differentiation */
+.featured .container {
+  background: none;
+}
+
+/* "Selected Work" header: a little less space above */
+.featured__header {
+  margin-bottom: var(--space-md);
+}
+
+
+/* ── 6. RESPONSIVE FIXES
+   ─────────────────────────────────────────────────────────── */
+
+@media (max-width: 1100px) {
+  .hero-stacked__name {
+    font-size: clamp(2.5rem, 17vw, 11rem);
+  }
+}
+
+@media (max-width: 700px) {
+  .hero-stacked__name {
+    font-size: clamp(2rem, 16vw, 6rem);
+    white-space: nowrap;
+  }
+
+  .hero-c-thumb {
+    width: 108px;
+    height: 142px;
+  }
+
+  .hero-carousel-track {
+    gap: 0.625rem;
+    padding-inline: 0.25vw;
+  }
+}
+
+@media (max-width: 400px) {
+  .hero-stacked__name {
+    font-size: clamp(1.75rem, 14vw, 3.5rem);
+  }
+  .hero-c-thumb {
+    width: 86px;
+    height: 114px;
+  }
+}
+
