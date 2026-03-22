@@ -1454,6 +1454,9 @@ body { padding-top: var(--nav-height); }
   margin-top: -0.25rem;
 }
 
+.carousel-wrapper {
+  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
 
 /* ============================================================
    CAROUSEL ARROWS + CHEVRON
@@ -1618,6 +1621,11 @@ body { padding-top: var(--nav-height); }
 
 .hero-stacked__link:hover { color: var(--color-accent); }
 
+.featured-title {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  letter-spacing: 0.05em;
+}
 
 /* ── Carousel row ── */
 .hero-carousel-row {
