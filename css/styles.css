@@ -1964,10 +1964,10 @@ body { padding-top: var(--nav-height); }
 
 .hero-carousel-track {
   /* Almost no padding — ovals should bleed off both edges */
-  padding-inline: 3.5vw;
+  padding-inline: 6vw;
   padding-top: 0.35rem;
   padding-bottom: 1.25rem;
-  gap: 1.4rem;               /* slightly tighter — more ovals visible at once */
+  gap: 2.5rem;               /* slightly tighter — more ovals visible at once */
   align-items: flex-end;
 }
 
@@ -1983,8 +1983,9 @@ body { padding-top: var(--nav-height); }
 
 /* Label spacing */
 .hero-c-label {
-  margin-top: 0.5rem;
-  font-size: 0.8125rem;
+  margin-top: 0.75rem;
+  font-size: 0.9rem;
+   opacity: 0.8;
 }
 
 
