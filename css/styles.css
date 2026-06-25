@@ -2052,9 +2052,6 @@ body { padding-top: var(--nav-height); }
    Paste at the very bottom of styles.css
    ============================================================ */
 
-/* — Load Instrument Sans for the nav logo + role label — */
-@import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&display=swap');
-
 
 /* ── NAV LOGO — uppercase, tracked-out Instrument Sans ── */
 .nav__logo {
