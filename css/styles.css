@@ -459,7 +459,7 @@ strong { font-weight: 600; color: var(--color-text); }
 }
 
 .hero-mock__inner {
-  max-width: 900px;
+  max-width: 780px;
   margin-inline: auto;
   padding-inline: var(--space-md);
   text-align: center;
@@ -482,7 +482,7 @@ strong { font-weight: 600; color: var(--color-text); }
   position: relative;
   display: inline-block;
   text-align: left;
-  max-width: 100%;
+  max-width: 640px;   /* forces the headline to wrap after "experiences" */
 }
 
 /* Headline — slightly tighter and shorter */
