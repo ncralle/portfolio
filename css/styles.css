@@ -453,8 +453,8 @@ strong { font-weight: 600; color: var(--color-text); }
 
 .hero-mock {
   background-color: var(--color-bg);
-  padding-top: clamp(2rem, 5vw, 4rem);
-  padding-bottom: clamp(2rem, 4vw, 3.5rem);
+  padding-top: clamp(1.25rem, 3vw, 2.5rem);
+  padding-bottom: clamp(1.25rem, 3vw, 2.5rem);
   overflow: hidden;
 }
 
@@ -473,7 +473,7 @@ strong { font-weight: 600; color: var(--color-text); }
   letter-spacing: 0.28em;
   text-transform: uppercase;
   color: var(--color-text);
-  margin-bottom: 1.75rem;
+  margin-bottom: 1rem;
   opacity: 0.85;
 }
 
@@ -519,7 +519,7 @@ strong { font-weight: 600; color: var(--color-text); }
 
 .featured-mock {
   background-color: var(--color-bg);
-  padding-block: clamp(2rem, 4vw, 4rem);
+  padding-block: clamp(1rem, 2.5vw, 2rem);
   padding-inline: clamp(1rem, 3vw, 3rem);
 }
 
