@@ -1506,14 +1506,14 @@ strong { font-weight: 600; color: var(--color-text); }
 @media (max-width: 640px) {
   /* Hanko drops below the headline on narrow screens */
   .hero-mock__headline-row {
+    display: block;
     padding-right: 0;
   }
-
   .hero-mock__hanko {
     position: static;
     display: block;
-    margin: 1rem 0 0 auto;
-    width: 56px;
+    margin: 0.75rem auto 0;
+    width: 42px;
   }
 }
 
