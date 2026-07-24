@@ -1619,6 +1619,53 @@ strong { font-weight: 600; color: var(--color-text); }
   letter-spacing: 0.14em;
 }
 
+/* ============================================================
+   MOBILE FIX — stacked card layout
+   Must stay at the very bottom of this file so it overrides
+   the CARD HEIGHT REFINEMENT block above it
+   ============================================================ */
+
+@media (max-width: 900px) {
+
+  /* Release the height cap — stacked cards need to grow */
+  .fcard--large,
+  .fcard--small {
+    min-height: 0;
+    max-height: none;
+  }
+
+  /* Body goes full width once the card stacks */
+  .fcard--large .fcard__body {
+    flex: 1 1 auto;
+    width: 100%;
+    max-width: 100%;
+    padding: 1.5rem 1.25rem;
+  }
+
+  /* Image goes full width and sits above the text */
+  .fcard--large .fcard__image {
+    flex: none;
+    width: 100%;
+    max-width: 100%;
+    aspect-ratio: 16 / 10;
+    order: -1;
+  }
+
+  .fcard--large .fcard__image img {
+    object-position: center top;
+  }
+
+  /* Small cards: percentage heights break without a fixed card height */
+  .fcard__image--top {
+    height: auto;
+    aspect-ratio: 16 / 10;
+  }
+
+  .fcard__body--small {
+    height: auto;
+  }
+}
+
 .fcard__award--sm .fcard__award-title {
   font-size: 0.7rem;
   letter-spacing: 0.06em;
