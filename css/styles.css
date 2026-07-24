@@ -571,25 +571,6 @@ strong { font-weight: 600; color: var(--color-text); }
 .fcard__badge--web      { background: rgba(40, 40, 40, 0.78); }
 
 
-/* ── Large card (MyAbility) ── */
-.fcard--large {
-  grid-column: 1;
-  grid-row: 1;
-  flex-direction: row;
-  min-height: 320px;
-  max-height: 360px;
-}
-
-.fcard--large .fcard__body {
-  flex: 1;
-  padding: 2.25rem 2rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  justify-content: space-between;
-}
-
-
 /* ── Small cards (Emilia's + Sakura) ── */
 .fcard--small {
   flex-direction: column;
