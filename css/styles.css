@@ -1,46 +1,56 @@
 /* ============================================================
    Nina Cralle Portfolio — styles.css
    ============================================================
-   Fonts loaded in HTML: Cormorant Garamond (display) + DM Sans (body)
-   
+   Fonts loaded in HTML:
+     - Fredericka the Great (legacy hero name — no longer used on home)
+     - Cormorant Garamond (display, italic keywords)
+     - DM Sans (body)
+     - Instrument Sans (nav + labels)
+
    Table of Contents:
-   1.  CSS Variables
-   2.  Reset & Base
-   3.  Typography
-   4.  Layout Utilities
-   5.  Navigation
-   6.  Footer
-   7.  Buttons & Links
-   8.  Image Placeholders
-   9.  Homepage
-   10. Projects Grid Page
-   11. Project Detail Pages
-   12. About Page
-   13. Contact Page
-   14. Animations & Transitions
-   15. Responsive Styles
+     1.  Design tokens (variables)
+     2.  Reset & base
+     3.  Typography
+     4.  Layout utilities
+     5.  Navigation
+     6.  Buttons & links
+     7.  Image utilities
+     8.  Home — hero (mock composition)
+     9.  Home — featured projects grid
+     10. Home — tagline strip
+     11. Home — legacy about strip (still used)
+     12. Home — legacy CTA strip (still used)
+     13. Projects list page
+     14. Project detail page
+     15. About page
+     16. Contact page
+     17. Footer
+     18. Animations
+     19. Responsive
    ============================================================ */
 
 
 /* ============================================================
-   1. CSS VARIABLES
+   1. DESIGN TOKENS
    ============================================================ */
 
 :root {
   /* Colors */
-  --color-bg:          #F8F6F2;   /* warm cream */
+  --color-bg:          #F8F6F2;
   --color-surface:     #FFFFFF;
-  --color-card:        #F0EDE7;   /* light warm card bg */
-  --color-text:        #1A1916;   /* warm near-black */
-  --color-muted:       #7A776F;   /* muted body text */
-  --color-accent:      #B07A52;   /* terracotta / copper */
+  --color-card:        #F0EDE7;
+  --color-card-warm:   #F1ECE2;
+  --color-text:        #1A1916;
+  --color-muted:       #7A776F;
+  --color-accent:      #B07A52;
   --color-accent-dark: #8A5C38;
   --color-border:      #DDD9D1;
-  --color-placeholder: #D5D1C9;   /* img placeholder bg */
+  --color-placeholder: #D5D1C9;
 
   /* Typography */
   --font-display: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
   --font-body:    'DM Sans', system-ui, -apple-system, sans-serif;
+  --font-mono:    'Instrument Sans', system-ui, sans-serif;
 
   /* Spacing */
   --space-xs:  0.5rem;
@@ -60,7 +70,7 @@
   --radius-md: 8px;
   --radius-lg: 16px;
 
-  /* Transitions */
+  /* Motion */
   --ease:      0.25s ease;
   --ease-slow: 0.5s ease;
 }
@@ -86,9 +96,10 @@ body {
   background-color: var(--color-bg);
   color: var(--color-text);
   font-family: var(--font-body);
-  font-size: 1.0625rem; /* 17px */
+  font-size: 1.0625rem;
   line-height: 1.65;
   min-height: 100vh;
+  padding-top: var(--nav-height);
 }
 
 img {
@@ -97,14 +108,8 @@ img {
   height: auto;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-ul, ol {
-  list-style: none;
-}
+a { color: inherit; text-decoration: none; }
+ul, ol { list-style: none; }
 
 button {
   cursor: pointer;
@@ -113,14 +118,12 @@ button {
   font-family: inherit;
 }
 
-/* Accessible focus outline */
 :focus-visible {
   outline: 2px solid var(--color-accent);
   outline-offset: 3px;
   border-radius: 2px;
 }
 
-/* Selection color */
 ::selection {
   background-color: var(--color-accent);
   color: #fff;
@@ -136,15 +139,6 @@ h1, h2, h3, h4 {
   font-weight: 600;
   line-height: 1.15;
   letter-spacing: -0.01em;
-}
-
-/* Display — used for hero headline on homepage */
-.display {
-  font-family: var(--font-display);
-  font-size: clamp(3.5rem, 8vw, 7rem);
-  font-weight: 500;
-  line-height: 1.0;
-  letter-spacing: -0.02em;
 }
 
 h1 { font-size: clamp(2.25rem, 5vw, 3.75rem); }
@@ -175,7 +169,6 @@ p.dark { color: var(--color-text); }
 }
 
 strong { font-weight: 600; color: var(--color-text); }
-
 .italic { font-style: italic; }
 
 
@@ -195,14 +188,8 @@ strong { font-weight: 600; color: var(--color-text); }
   padding-inline: var(--space-md);
 }
 
-/* Generic section spacing */
-.section {
-  padding-block: var(--space-xl);
-}
-
-.section--sm {
-  padding-block: var(--space-lg);
-}
+.section    { padding-block: var(--space-xl); }
+.section--sm { padding-block: var(--space-lg); }
 
 .divider {
   border: none;
@@ -210,16 +197,13 @@ strong { font-weight: 600; color: var(--color-text); }
   margin-block: var(--space-lg);
 }
 
-/* Two-column flex row */
 .split {
   display: flex;
   gap: var(--space-lg);
   align-items: flex-start;
 }
-
 .split > * { flex: 1; }
 
-/* Visually hidden (accessible) */
 .sr-only {
   position: absolute;
   width: 1px;
@@ -239,9 +223,7 @@ strong { font-weight: 600; color: var(--color-text); }
 
 .nav {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
+  top: 0; left: 0; right: 0;
   z-index: 100;
   height: var(--nav-height);
   display: flex;
@@ -253,10 +235,7 @@ strong { font-weight: 600; color: var(--color-text); }
   transition: border-color var(--ease);
 }
 
-/* Add border when scrolled — toggled via JS */
-.nav.scrolled {
-  border-bottom-color: var(--color-border);
-}
+.nav.scrolled { border-bottom-color: var(--color-border); }
 
 .nav__inner {
   max-width: var(--max-width);
@@ -268,20 +247,20 @@ strong { font-weight: 600; color: var(--color-text); }
   justify-content: space-between;
 }
 
-/* Logo / Name */
+/* Logo (uppercase, tracked, Instrument Sans) */
 .nav__logo {
-  font-family: var(--font-display);
-  font-size: 1.375rem;
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
   font-weight: 500;
-  letter-spacing: -0.01em;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
   color: var(--color-text);
   text-decoration: none;
   transition: color var(--ease);
 }
-
 .nav__logo:hover { color: var(--color-accent); }
 
-/* Desktop links */
+/* Desktop nav links */
 .nav__links {
   display: flex;
   gap: var(--space-md);
@@ -289,9 +268,11 @@ strong { font-weight: 600; color: var(--color-text); }
 }
 
 .nav__links a {
-  font-family: var(--font-body);
-  font-size: 0.875rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
   font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
   color: var(--color-muted);
   text-decoration: none;
   position: relative;
@@ -302,23 +283,17 @@ strong { font-weight: 600; color: var(--color-text); }
 .nav__links a::after {
   content: '';
   position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 0;
-  height: 1px;
+  bottom: 0; left: 0;
+  width: 0; height: 1px;
   background-color: var(--color-accent);
   transition: width var(--ease);
 }
 
 .nav__links a:hover,
-.nav__links a.active {
-  color: var(--color-text);
-}
+.nav__links a.active { color: var(--color-text); }
 
 .nav__links a:hover::after,
-.nav__links a.active::after {
-  width: 100%;
-}
+.nav__links a.active::after { width: 100%; }
 
 /* Mobile hamburger */
 .nav__toggle {
@@ -339,18 +314,16 @@ strong { font-weight: 600; color: var(--color-text); }
   transition: transform var(--ease), opacity var(--ease);
 }
 
-/* Mobile menu open state */
 .nav__toggle.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
 .nav__toggle.open span:nth-child(2) { opacity: 0; }
 .nav__toggle.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
 
-/* Mobile nav drawer */
+/* Mobile drawer */
 .nav__mobile {
   display: none;
   position: fixed;
   top: var(--nav-height);
-  left: 0;
-  right: 0;
+  left: 0; right: 0;
   background-color: var(--color-bg);
   border-bottom: 1px solid var(--color-border);
   padding: var(--space-md);
@@ -362,8 +335,10 @@ strong { font-weight: 600; color: var(--color-text); }
 .nav__mobile.open { display: flex; }
 
 .nav__mobile a {
-  font-size: 1.125rem;
-  font-family: var(--font-display);
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
   color: var(--color-text);
   padding-block: var(--space-xs);
   border-bottom: 1px solid var(--color-border);
@@ -371,57 +346,7 @@ strong { font-weight: 600; color: var(--color-text); }
 
 
 /* ============================================================
-   6. FOOTER
-   ============================================================ */
-
-.footer {
-  background-color: var(--color-text);
-  color: rgba(255, 255, 255, 0.55);
-  padding-block: var(--space-lg);
-}
-
-.footer__inner {
-  max-width: var(--max-width);
-  margin-inline: auto;
-  padding-inline: var(--space-md);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: var(--space-md);
-}
-
-.footer__name {
-  font-family: var(--font-display);
-  font-size: 1.25rem;
-  color: rgba(255, 255, 255, 0.9);
-}
-
-.footer__links {
-  display: flex;
-  gap: var(--space-md);
-  flex-wrap: wrap;
-}
-
-.footer__links a {
-  font-size: 0.875rem;
-  color: rgba(255, 255, 255, 0.55);
-  transition: color var(--ease);
-}
-
-.footer__links a:hover { color: #fff; }
-
-.footer__copy {
-  font-size: 0.8125rem;
-  color: rgba(255, 255, 255, 0.35);
-  width: 100%;
-  text-align: right;
-  margin-top: var(--space-sm);
-}
-
-
-/* ============================================================
-   7. BUTTONS & LINKS
+   6. BUTTONS & LINKS
    ============================================================ */
 
 .btn {
@@ -435,7 +360,8 @@ strong { font-weight: 600; color: var(--color-text); }
   font-weight: 500;
   letter-spacing: 0.03em;
   text-decoration: none;
-  transition: background-color var(--ease), color var(--ease), transform var(--ease), box-shadow var(--ease);
+  transition: background-color var(--ease), color var(--ease),
+              transform var(--ease), box-shadow var(--ease);
   cursor: pointer;
 }
 
@@ -443,7 +369,6 @@ strong { font-weight: 600; color: var(--color-text); }
   background-color: var(--color-text);
   color: #fff;
 }
-
 .btn--primary:hover {
   background-color: var(--color-accent);
   transform: translateY(-1px);
@@ -455,7 +380,6 @@ strong { font-weight: 600; color: var(--color-text); }
   color: var(--color-text);
   border: 1.5px solid var(--color-text);
 }
-
 .btn--outline:hover {
   background-color: var(--color-text);
   color: #fff;
@@ -468,31 +392,26 @@ strong { font-weight: 600; color: var(--color-text); }
   padding-inline: 0;
   font-weight: 500;
 }
-
 .btn--ghost::after {
   content: '→';
   transition: transform var(--ease);
   display: inline-block;
 }
-
 .btn--ghost:hover::after { transform: translateX(4px); }
 
-/* Inline text link */
 .text-link {
   color: var(--color-accent);
   text-decoration: underline;
   text-underline-offset: 3px;
   transition: color var(--ease);
 }
-
 .text-link:hover { color: var(--color-accent-dark); }
 
 
 /* ============================================================
-   8. IMAGE PLACEHOLDERS
+   7. IMAGE UTILITIES
    ============================================================ */
 
-/* Replace .img-placeholder with a real <img> tag when you have assets */
 .img-placeholder {
   background-color: var(--color-placeholder);
   border-radius: var(--radius-md);
@@ -508,12 +427,11 @@ strong { font-weight: 600; color: var(--color-text); }
   font-family: var(--font-body);
 }
 
-/* Make real img tags look consistent */
 .project-img {
   width: 100%;
   border-radius: var(--radius-md);
   object-fit: cover;
-  background-color: var(--color-placeholder); /* shows while loading */
+  background-color: var(--color-placeholder);
 }
 
 .project-img--tall  { aspect-ratio: 4 / 5; }
@@ -521,7 +439,6 @@ strong { font-weight: 600; color: var(--color-text); }
 .project-img--sq    { aspect-ratio: 1 / 1; }
 .project-img--hero  { aspect-ratio: 21 / 9; min-height: 320px; }
 
-/* Full image — no crop. Use on project hero images instead of project-img--hero */
 .project-img--full {
   object-fit: contain;
   height: auto;
@@ -529,85 +446,448 @@ strong { font-weight: 600; color: var(--color-text); }
   background-color: transparent;
 }
 
+
 /* ============================================================
-   9. HOMEPAGE
+   8. HOME — HERO (mockup composition)
    ============================================================ */
 
-/* Offset body for fixed nav */
-body { padding-top: var(--nav-height); }
+.hero-mock {
+  background-color: var(--color-bg);
+  padding-top: clamp(3rem, 7vw, 6rem);
+  padding-bottom: clamp(3rem, 7vw, 5.5rem);
+  overflow: hidden;
+}
 
-/* —— Hero —— */
-.hero {
+.hero-mock__inner {
+  max-width: 780px;
+  margin-inline: auto;
+  padding-inline: var(--space-md);
+  text-align: center;
+}
+
+/* "PRODUCT DESIGNER · UX DESIGNER" eyebrow */
+.hero-mock__role {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--color-text);
+  margin-bottom: 1.75rem;
+  opacity: 0.85;
+}
+
+/* Headline + hanko wrapper (position: relative anchors seal) */
+.hero-mock__headline-row {
+  position: relative;
+  max-width: 780px;
+  margin-inline: auto;
+  padding-right: clamp(50px, 6vw, 90px);
+}
+
+/* Editorial serif headline */
+.hero-mock__headline {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(1.5rem, 3.2vw, 2.4rem);
+  line-height: 1.35;
+  letter-spacing: -0.005em;
+  color: var(--color-text);
+  text-align: left;
+  max-width: 700px;
+}
+
+.hero-mock__headline em {
+  font-style: italic;
+  color: var(--color-text);
+}
+
+/* Hanko seal — anchored bottom-right of headline like a signature */
+.hero-mock__hanko {
+  position: absolute;
+  right: -0.5rem;
+  bottom: 0.25rem;
+  width: clamp(50px, 5vw, 70px);
+  height: auto;
+  z-index: 2;
+}
+
+
+/* ============================================================
+   9. HOME — FEATURED PROJECTS GRID
+   ============================================================ */
+
+.featured-mock {
+  background-color: var(--color-bg);
+  padding-block: clamp(2rem, 4vw, 4rem);
+  padding-inline: clamp(1rem, 3vw, 3rem);
+}
+
+/* 3 cards in a single row: MyAbility (2fr) + Emilia's (1fr) + Sakura (1fr) */
+.featured-mock__grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  grid-template-rows: 1fr;
+  gap: 1.25rem;
+  max-width: 1360px;
+  margin-inline: auto;
+}
+
+/* Base card */
+.fcard {
+  position: relative;
+  background-color: var(--color-card-warm);
+  border-radius: 14px;
+  overflow: hidden;
+  text-decoration: none;
+  color: var(--color-text);
+  display: flex;
+  transition: transform var(--ease), box-shadow var(--ease);
+}
+
+.fcard:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
+}
+
+/* Corner badge */
+.fcard__badge {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 3;
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  padding: 0.4rem 0.75rem;
+  border-radius: 4px;
+  color: #fff;
+  text-transform: uppercase;
+}
+
+.fcard__badge--silver   { background: rgba(40, 40, 40, 0.78); }
+.fcard__badge--capstone { background: rgba(180, 80, 50, 0.92); }
+.fcard__badge--web      { background: rgba(40, 40, 40, 0.78); }
+
+
+/* ── Large card (MyAbility) ── */
+.fcard--large {
+  grid-column: 1;
+  grid-row: 1;
+  flex-direction: row;
+  min-height: 380px;
+}
+
+.fcard--large .fcard__body {
+  flex: 1;
+  padding: 2.25rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  justify-content: space-between;
+}
+
+.fcard--large .fcard__image {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #C9B8D6 0%, #B8B5E0 100%);
+  overflow: hidden;
+}
+
+.fcard--large .fcard__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 1rem;
+}
+
+
+/* ── Small cards (Emilia's + Sakura) ── */
+.fcard--small {
+  flex-direction: column;
+  min-height: 380px;
+}
+
+.fcard--small.fcard:nth-of-type(2) { grid-column: 2; grid-row: 1; }
+.fcard--small.fcard:nth-of-type(3) { grid-column: 3; grid-row: 1; }
+
+.fcard__image--top {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background-color: var(--color-card);
+  flex: 1;
+}
+
+.fcard__image--top img,
+.fcard__image--top .img-placeholder {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0;
+  min-height: unset;
+}
+
+.fcard__body--small {
+  padding: 1rem 1.25rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  flex-shrink: 0;
+}
+
+
+/* ── Card typography ── */
+.fcard__eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.fcard__title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 3.2vw, 2.75rem);
+  font-weight: 600;
+  line-height: 1.1;
+  color: var(--color-text);
+  margin-top: 0.5rem;
+}
+
+.fcard__title--sm {
+  font-size: 1.5rem;
+  margin-top: 0;
+}
+
+.fcard__meta {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  color: var(--color-muted);
+  margin-top: 0.35rem;
+  letter-spacing: 0.02em;
+}
+
+.fcard__desc {
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: var(--color-muted);
+  max-width: 36ch;
+  margin-top: 1rem;
+}
+
+.fcard--small .fcard__desc {
+  margin-top: 0.6rem;
+  font-size: 0.85rem;
+}
+
+/* Award row (MyAbility) */
+.fcard__award {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.fcard__award-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  background: rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.fcard__award-label {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.fcard__award-title {
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--color-text);
+  margin-top: 0.1rem;
+}
+
+/* Capstone pill (Emilia's) */
+.fcard__capstone-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.85rem;
+  padding: 0.4rem 0.65rem;
+  background: rgba(180, 80, 50, 0.1);
+  border-radius: 100px;
+  width: fit-content;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--color-text);
+  line-height: 1.25;
+}
+
+.fcard__capstone-icon { font-size: 0.85rem; }
+.fcard__capstone-sub  { opacity: 0.6; font-size: 0.65rem; letter-spacing: 0.05em; }
+
+
+/* ============================================================
+   10. HOME — TAGLINE STRIP
+   ============================================================ */
+
+.tagline-strip {
+  background-color: var(--color-bg);
+  padding-block: 2.5rem;
+  border-top: 1px solid var(--color-border);
+}
+
+.tagline-strip__inner {
+  max-width: 900px;
+  margin-inline: auto;
+  padding-inline: var(--space-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(1.5rem, 5vw, 3.5rem);
+}
+
+.tagline-strip__text {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--color-text);
+  opacity: 0.75;
+}
+
+.tagline-strip__mark {
+  width: clamp(36px, 4vw, 52px);
+  height: auto;
+  flex-shrink: 0;
+}
+
+
+/* ============================================================
+   11. HOME — ABOUT STRIP
+   ============================================================ */
+
+.about-strip {
+  padding-block: var(--space-xl);
+  border-top: 1px solid var(--color-border);
+}
+
+.about-strip__inner {
+  max-width: var(--max-width);
+  margin-inline: auto;
+  padding-inline: var(--space-md);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-xl);
+  align-items: center;
+}
+
+.about-strip__image {
+  aspect-ratio: 4 / 5;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.about-strip__image img,
+.about-strip__image .img-placeholder {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0;
+}
+
+.about-strip__content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+
+/* ============================================================
+   12. HOME — CONTACT CTA STRIP
+   ============================================================ */
+
+.cta-strip {
+  background-color: var(--color-text);
+  color: #fff;
+  padding-block: var(--space-xl);
+  text-align: center;
+}
+
+.cta-strip h2 {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 3.25rem);
+  color: #fff;
+  margin-bottom: var(--space-sm);
+}
+
+.cta-strip p {
+  color: rgba(255, 255, 255, 0.6);
+  margin-inline: auto;
+  margin-bottom: var(--space-md);
+}
+
+.cta-strip .btn--outline {
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.cta-strip .btn--outline:hover {
+  background-color: #fff;
+  color: var(--color-text);
+}
+
+
+/* ============================================================
+   13. PROJECTS LIST PAGE
+   ============================================================ */
+
+.page-hero {
   padding-top: var(--space-xl);
-  padding-bottom: var(--space-xl);
+  padding-bottom: var(--space-lg);
   border-bottom: 1px solid var(--color-border);
 }
 
-.hero__inner {
+.page-hero__inner {
   max-width: var(--max-width);
   margin-inline: auto;
   padding-inline: var(--space-md);
 }
 
-.hero__eyebrow {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  margin-bottom: 1.5rem;
-}
-
-.hero__eyebrow::before {
-  content: '';
-  display: inline-block;
-  width: 32px;
-  height: 1px;
-  background-color: var(--color-accent);
-}
-
-.hero__headline {
-  margin-bottom: var(--space-md);
-}
-
-.hero__headline em {
-  font-style: italic;
-  color: var(--color-accent);
-}
-
-.hero__sub {
-  font-size: 1.125rem;
-  color: var(--color-muted);
-  max-width: 56ch;
-  line-height: 1.7;
-  margin-bottom: var(--space-md);
-}
-
-.hero__cta {
-  display: flex;
-  gap: var(--space-sm);
-  flex-wrap: wrap;
-}
-
-/* —— Featured projects section —— */
-.featured {
+.projects-grid {
   padding-block: var(--space-xl);
 }
 
-.featured__header {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: var(--space-md);
-  margin-bottom: var(--space-lg);
-  flex-wrap: wrap;
+.projects-grid__inner {
+  max-width: var(--max-width);
+  margin-inline: auto;
+  padding-inline: var(--space-md);
 }
 
-.featured__grid {
+.projects-grid__layout {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 1.5rem;
+  gap: 2rem;
 }
 
-/* —— Project Card —— */
+/* Old-style .card (used on projects listing page) */
 .card {
   background-color: var(--color-card);
   border-radius: var(--radius-lg);
@@ -686,7 +966,6 @@ body { padding-top: var(--nav-height); }
 
 .card:hover .card__link { gap: 0.75rem; }
 
-/* Award badge on card */
 .card__badge {
   display: inline-flex;
   align-items: center;
@@ -702,104 +981,7 @@ body { padding-top: var(--nav-height); }
   margin-top: 0.5rem;
 }
 
-/* —— About preview strip —— */
-.about-strip {
-  padding-block: var(--space-xl);
-  border-top: 1px solid var(--color-border);
-}
-
-.about-strip__inner {
-  max-width: var(--max-width);
-  margin-inline: auto;
-  padding-inline: var(--space-md);
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--space-xl);
-  align-items: center;
-}
-
-.about-strip__image {
-  aspect-ratio: 4 / 5;
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-}
-
-.about-strip__image img,
-.about-strip__image .img-placeholder {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 0;
-}
-
-.about-strip__content { display: flex; flex-direction: column; gap: var(--space-md); }
-
-/* —— Contact CTA strip —— */
-.cta-strip {
-  background-color: var(--color-text);
-  color: #fff;
-  padding-block: var(--space-xl);
-  text-align: center;
-}
-
-.cta-strip h2 {
-  font-family: var(--font-display);
-  font-size: clamp(2rem, 5vw, 3.25rem);
-  color: #fff;
-  margin-bottom: var(--space-sm);
-}
-
-.cta-strip p {
-  color: rgba(255,255,255,0.6);
-  margin-inline: auto;
-  margin-bottom: var(--space-md);
-}
-
-.cta-strip .btn--outline {
-  color: #fff;
-  border-color: rgba(255,255,255,0.4);
-}
-
-.cta-strip .btn--outline:hover {
-  background-color: #fff;
-  color: var(--color-text);
-}
-
-
-/* ============================================================
-   10. PROJECTS GRID PAGE
-   ============================================================ */
-
-.page-hero {
-  padding-top: var(--space-xl);
-  padding-bottom: var(--space-lg);
-  border-bottom: 1px solid var(--color-border);
-}
-
-.page-hero__inner {
-  max-width: var(--max-width);
-  margin-inline: auto;
-  padding-inline: var(--space-md);
-}
-
-.projects-grid {
-  padding-block: var(--space-xl);
-}
-
-.projects-grid__inner {
-  max-width: var(--max-width);
-  margin-inline: auto;
-  padding-inline: var(--space-md);
-}
-
-/* Looser grid for the full projects page */
-.projects-grid__layout {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 2rem;
-}
-
-/* Wide (featured) card — spans 2 columns */
+/* Wide featured card variant */
 .card--featured {
   grid-column: 1 / -1;
   flex-direction: row;
@@ -818,10 +1000,9 @@ body { padding-top: var(--nav-height); }
 
 
 /* ============================================================
-   11. PROJECT DETAIL PAGES
+   14. PROJECT DETAIL PAGE
    ============================================================ */
 
-/* Back link at top of project pages */
 .project-back {
   display: inline-flex;
   align-items: center;
@@ -831,11 +1012,9 @@ body { padding-top: var(--nav-height); }
   margin-bottom: var(--space-md);
   transition: color var(--ease);
 }
-
 .project-back:hover { color: var(--color-text); }
 .project-back::before { content: '←'; }
 
-/* Project hero */
 .project-hero {
   padding-top: var(--space-lg);
   padding-bottom: 0;
@@ -860,12 +1039,9 @@ body { padding-top: var(--nav-height); }
   text-transform: uppercase;
   color: var(--color-muted);
 }
-
 .project-meta-tag.accent { color: var(--color-accent); }
 
-.project-hero__title {
-  margin-bottom: var(--space-sm);
-}
+.project-hero__title { margin-bottom: var(--space-sm); }
 
 .project-hero__subtitle {
   font-size: 1.1875rem;
@@ -881,7 +1057,6 @@ body { padding-top: var(--nav-height); }
   margin-top: var(--space-md);
 }
 
-/* Project content sections */
 .project-content {
   max-width: var(--content-width);
   margin-inline: auto;
@@ -889,9 +1064,7 @@ body { padding-top: var(--nav-height); }
   padding-block: var(--space-xl);
 }
 
-.project-section {
-  margin-bottom: var(--space-xl);
-}
+.project-section { margin-bottom: var(--space-xl); }
 
 .project-section__label {
   display: flex;
@@ -1020,7 +1193,7 @@ body { padding-top: var(--nav-height); }
   max-width: none;
 }
 
-/* Next project nav */
+/* Next-project navigation */
 .project-nav {
   border-top: 1px solid var(--color-border);
   padding-block: var(--space-lg);
@@ -1062,7 +1235,7 @@ body { padding-top: var(--nav-height); }
 
 
 /* ============================================================
-   12. ABOUT PAGE
+   15. ABOUT PAGE
    ============================================================ */
 
 .about-hero {
@@ -1094,7 +1267,11 @@ body { padding-top: var(--nav-height); }
   border-radius: 0;
 }
 
-.about-text { display: flex; flex-direction: column; gap: var(--space-md); }
+.about-text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
 
 .about-text p { max-width: none; }
 
@@ -1121,7 +1298,7 @@ body { padding-top: var(--nav-height); }
 
 
 /* ============================================================
-   13. CONTACT PAGE
+   16. CONTACT PAGE
    ============================================================ */
 
 .contact-page {
@@ -1186,10 +1363,59 @@ body { padding-top: var(--nav-height); }
 
 
 /* ============================================================
-   14. ANIMATIONS & TRANSITIONS
+   17. FOOTER
    ============================================================ */
 
-/* Fade-up on load — applied via JS to elements with [data-animate] */
+.footer {
+  background-color: var(--color-text);
+  color: rgba(255, 255, 255, 0.55);
+  padding-block: var(--space-lg);
+}
+
+.footer__inner {
+  max-width: var(--max-width);
+  margin-inline: auto;
+  padding-inline: var(--space-md);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+}
+
+.footer__name {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.footer__links {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+.footer__links a {
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.55);
+  transition: color var(--ease);
+}
+
+.footer__links a:hover { color: #fff; }
+
+.footer__copy {
+  font-size: 0.8125rem;
+  color: rgba(255, 255, 255, 0.35);
+  width: 100%;
+  text-align: right;
+  margin-top: var(--space-sm);
+}
+
+
+/* ============================================================
+   18. ANIMATIONS
+   ============================================================ */
+
 [data-animate] {
   opacity: 0;
   transform: translateY(24px);
@@ -1201,7 +1427,6 @@ body { padding-top: var(--nav-height); }
   transform: translateY(0);
 }
 
-/* Staggered delay helpers */
 [data-delay="1"] { transition-delay: 0.1s; }
 [data-delay="2"] { transition-delay: 0.2s; }
 [data-delay="3"] { transition-delay: 0.3s; }
@@ -1209,1300 +1434,12 @@ body { padding-top: var(--nav-height); }
 
 
 /* ============================================================
-   15. RESPONSIVE STYLES
+   19. RESPONSIVE
    ============================================================ */
 
-/* — Tablet: ≤ 900px — */
+/* ── Tablet: ≤ 900px ── */
 @media (max-width: 900px) {
-  .featured__grid,
-  .projects-grid__layout {
-    grid-template-columns: 1fr;
-  }
-
-  .card--featured {
-    flex-direction: column;
-  }
-
-  .card--featured .card__image {
-    width: 100%;
-    min-height: 240px;
-    aspect-ratio: 3 / 2;
-  }
-
-  .about-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .about-photo {
-    position: static;
-    aspect-ratio: 4 / 3;
-    max-width: 400px;
-  }
-
-  .about-strip__inner {
-    grid-template-columns: 1fr;
-  }
-
-  .solution-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .results-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-/* — Mobile: ≤ 600px — */
-@media (max-width: 600px) {
-  :root {
-    --space-xl: 4rem;
-    --space-lg: 2.5rem;
-  }
-
-  .nav__links { display: none; }
-  .nav__toggle { display: flex; }
-
-  .hero__cta { flex-direction: column; }
-  .hero__cta .btn { text-align: center; justify-content: center; }
-
-  .featured__header {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .footer__inner { flex-direction: column; }
-  .footer__copy  { text-align: left; }
-
-  .results-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .process-row {
-    grid-template-columns: 1fr;
-  }
-
-  .project-nav__inner {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .project-nav__link--next {
-    text-align: left;
-  }
-}
-
-/* ============================================================
-   HERO — stacked layout
-   ============================================================ */
-
-.hero-stacked {
-  padding-top: var(--space-lg);
-  padding-bottom: 0;
-  border-bottom: 1px solid var(--color-border);
-  background-color: var(--color-bg);
-  overflow: hidden;
-}
-
-.hero-stacked__text {
-  text-align: center;
-  padding-inline: var(--space-md);
-  padding-bottom: var(--space-md);
-}
-
-.hero-stacked__eyebrow {
-  font-family: var(--font-body);
-  font-size: 0.6875rem;
-  font-weight: 500;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--color-muted);
-  margin-bottom: 0.75rem;
-}
-
-.hero-stacked__name {
-  font-family: 'Fredericka the Great', Georgia, serif;
-  font-weight: 400;
-  font-size: clamp(3rem, 14vw, 10rem);
-  line-height: 1.0;
-  letter-spacing: -0.01em;
-  color: var(--color-text);
-  white-space: nowrap;
-  margin-bottom: 1rem;
-}
-
-.hero-stacked__sub {
-  font-size: 1.0625rem;
-  color: var(--color-muted);
-  max-width: 44ch;
-  margin-inline: auto;
-  line-height: 1.6;
-  margin-bottom: 1.25rem;
-}
-
-.hero-stacked__link {
-  display: inline-block;
-  font-family: var(--font-body);
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: var(--color-text);
-  text-decoration: underline;
-  text-underline-offset: 4px;
-  text-decoration-thickness: 1px;
-  letter-spacing: 0.02em;
-  transition: color var(--ease);
-  margin-bottom: 2.25rem;
-}
-
-.hero-stacked__link:hover { color: var(--color-accent); }
-
-
-/* ============================================================
-   HERO CAROUSEL
-   ============================================================ */
-
-.hero-carousel-row {
-  position: relative;
-}
-
-.hero-carousel-scroll {
-  overflow-x: auto;
-  overflow-y: hidden;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-  cursor: grab;
-  -webkit-mask-image: linear-gradient(
-    to right,
-    transparent 0%,
-    black 5%,
-    black 95%,
-    transparent 100%
-  );
-  mask-image: linear-gradient(
-    to right,
-    transparent 0%,
-    black 5%,
-    black 95%,
-    transparent 100%
-  );
-}
-
-.hero-carousel-scroll::-webkit-scrollbar { display: none; }
-.hero-carousel-scroll.dragging { cursor: grabbing; }
-
-.hero-carousel-track {
-  display: flex;
-  align-items: flex-end;
-  gap: 1.25rem;
-  width: max-content;
-  padding-inline: 4vw;
-  padding-top: 1rem;
-  padding-bottom: 2.75rem;
-}
-
-.hero-c-item {
-  flex-shrink: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.6rem;
-  text-decoration: none;
-  color: var(--color-text);
-}
-
-.hero-c-thumb {
-  width:  clamp(110px, 10vw, 155px);
-  height: clamp(145px, 13vw, 205px);
-  border-radius: 999px;
-  overflow: hidden;
-  background-color: var(--color-card);
-  border: 1.5px solid var(--color-border);
-  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
-  flex-shrink: 0;
-}
-
-.hero-c-item:hover .hero-c-thumb {
-  transform: translateY(-6px) scale(1.04);
-  border-color: var(--color-accent);
-  box-shadow: 0 14px 36px rgba(176, 122, 82, 0.16);
-}
-
-.hero-c-thumb img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-.hero-c-label {
-  font-family: 'Fredericka the Great', Georgia, serif;
-  font-size: 0.8125rem;
-  color: var(--color-text);
-  text-align: center;
-  line-height: 1.2;
-  transition: color 0.25s ease;
-  max-width: 120px;
-}
-
-.hero-c-item:hover .hero-c-label { color: var(--color-accent); }
-
-.hero-c-type {
-  font-size: 0.5625rem;
-  letter-spacing: 0.13em;
-  text-transform: uppercase;
-  color: var(--color-muted);
-  text-align: center;
-  margin-top: -0.25rem;
-}
-
-.carousel-wrapper {
-  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-}
-
-/* ============================================================
-   CAROUSEL ARROWS + CHEVRON
-   ============================================================ */
-
-.hero-arrow {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-70%);
-  z-index: 20;
-  width: 34px;
-  height: 34px;
-  border-radius: 50%;
-  border: 1px solid var(--color-border);
-  background-color: rgba(248, 246, 242, 0.82);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-  color: var(--color-muted);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  font-size: 0.75rem;
-  opacity: 0.75;
-  transition: opacity 0.2s ease, border-color 0.2s ease,
-              color 0.2s ease, transform 0.2s ease;
-}
-
-.hero-arrow:hover {
-  opacity: 1;
-  border-color: var(--color-accent);
-  color: var(--color-accent);
-  transform: translateY(-70%) scale(1.1);
-}
-
-.hero-arrow--left  { left: 1rem; }
-.hero-arrow--right { right: 1rem; }
-.hero-arrow.hidden { opacity: 0 !important; pointer-events: none; }
-
-.hero-chevron {
-  display: flex;
-  justify-content: center;
-  padding-bottom: 1.5rem;
-  color: var(--color-muted);
-  font-size: 1.125rem;
-  animation: bounce 2s ease-in-out infinite;
-}
-
-@keyframes bounce {
-  0%, 100% { transform: translateY(0); }
-  50%       { transform: translateY(5px); }
-}
-
-
-/* ============================================================
-   RESPONSIVE
-   ============================================================ */
-
-@media (max-width: 900px) {
-  .hero-stacked__name {
-    font-size: clamp(2.5rem, 12vw, 7rem);
-  }
-}
-
-@media (max-width: 600px) {
-  .hero-stacked__name {
-    font-size: clamp(2rem, 15vw, 4rem);
-    white-space: normal;
-  }
-
-  .hero-c-thumb {
-    width: 88px;
-    height: 116px;
-  }
-
-  .hero-carousel-track {
-    gap: 0.875rem;
-    padding-inline: 2.5vw;
-  }
-
-  .hero-arrow {
-    width: 28px;
-    height: 28px;
-    font-size: 0.65rem;
-  }
-
-  .hero-arrow--left  { left: 0.4rem; }
-  .hero-arrow--right { right: 0.4rem; }
-}
-
-/* ============================================================
-   HERO OVERRIDES — paste at very bottom of styles.css
-   Replaces all previous hero-stacked / carousel blocks
-   ============================================================ */
-
-/* ── Section wrapper ── */
-.hero-stacked {
-  padding-top: clamp(2rem, 5vw, 3.5rem);
-  padding-bottom: 0;
-  border-bottom: 1px solid var(--color-border);
-  background-color: var(--color-bg);
-  overflow: hidden;
-}
-
-/* ── Text block ── */
-.hero-stacked__text {
-  text-align: center;
-  padding-inline: var(--space-md);
-  padding-bottom: 1.5rem;
-}
-
-.hero-stacked__eyebrow {
-  font-family: var(--font-body);
-  font-size: 0.6875rem;
-  font-weight: 500;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--color-muted);
-  margin-bottom: 0.5rem;
-}
-
-/*
-  NAME — fills the full viewport width on one line.
-  font-size uses a viewport-relative value so it always stays single-row.
-  The clamp floor (2.5rem) keeps it readable on very small phones.
-*/
-.hero-stacked__name {
-  font-family: 'Fredericka the Great', Georgia, serif;
-  font-weight: 400;
-  /* 18.5vw puts "Nina Cralle" edge-to-edge on a 1400px screen */
-  font-size: clamp(2.5rem, 18.5vw, 14rem);
-  line-height: 0.95;
-  letter-spacing: -0.015em;
-  color: var(--color-text);
-  white-space: nowrap;
-  margin-bottom: 0.75rem;
-}
-
-.hero-stacked__sub {
-  font-size: 1.0625rem;
-  color: var(--color-muted);
-  max-width: 48ch;
-  margin-inline: auto;
-  line-height: 1.6;
-  margin-bottom: 1rem;
-}
-
-/* Underlined "Featured Projects" link */
-.hero-stacked__link {
-  display: inline-block;
-  font-family: var(--font-body);
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: var(--color-text);
-  text-decoration: underline;
-  text-underline-offset: 4px;
-  text-decoration-thickness: 1px;
-  letter-spacing: 0.02em;
-  transition: color var(--ease);
-  margin-bottom: 0;
-}
-
-.hero-stacked__link:hover { color: var(--color-accent); }
-
-.featured-title {
-  margin-top: 2rem;
-  margin-bottom: 1rem;
-  letter-spacing: 0.05em;
-}
-
-/* ── Carousel row ── */
-.hero-carousel-row {
-  position: relative;
-  /* Slight negative top margin pulls ovals up, closer to name */
-  margin-top: 0;
-}
-
-.hero-carousel-scroll {
-  overflow-x: auto;
-  overflow-y: visible;   /* let ovals breathe above/below */
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-  cursor: grab;
-  /* Edge fade — ovals bleed off left and right edges */
-  -webkit-mask-image: linear-gradient(
-    to right,
-    transparent 0%,
-    black 3%,
-    black 97%,
-    transparent 100%
-  );
-  mask-image: linear-gradient(
-    to right,
-    transparent 0%,
-    black 3%,
-    black 97%,
-    transparent 100%
-  );
-}
-
-.hero-carousel-scroll::-webkit-scrollbar { display: none; }
-.hero-carousel-scroll.dragging { cursor: grabbing; }
-
-.hero-carousel-track {
-  display: flex;
-  align-items: center;    /* vertically center ovals — no bottom-align */
-  gap: 1rem;
-  width: max-content;
-  /* Very small inline padding so first/last oval can bleed off the edge */
-  padding-inline: 1vw;
-  padding-top: 1.25rem;
-  padding-bottom: 2rem;
-}
-
-/* ── Oval item ── */
-.hero-c-item {
-  flex-shrink: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
-  text-decoration: none;
-  color: var(--color-text);
-}
-
-/*
-  Bigger ovals — closer to the reference screenshot.
-  Reference shows ovals that are roughly 170–210px wide, 230–280px tall.
-*/
-.hero-c-thumb {
-  width:  clamp(130px, 13vw, 195px);
-  height: clamp(172px, 17vw, 258px);
-  border-radius: 999px;
-  overflow: hidden;
-  background-color: var(--color-card);
-  border: 1.5px solid var(--color-border);
-  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
-  flex-shrink: 0;
-}
-
-.hero-c-item:hover .hero-c-thumb {
-  transform: translateY(-7px) scale(1.04);
-  border-color: var(--color-accent);
-  box-shadow: 0 16px 40px rgba(176, 122, 82, 0.16);
-}
-
-.hero-c-thumb img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-.hero-c-label {
-  font-family: 'Fredericka the Great', Georgia, serif;
-  font-size: 0.8125rem;
-  color: var(--color-text);
-  text-align: center;
-  line-height: 1.2;
-  transition: color 0.25s ease;
-  max-width: 130px;
-}
-
-.hero-c-item:hover .hero-c-label { color: var(--color-accent); }
-
-.hero-c-type {
-  font-size: 0.5625rem;
-  letter-spacing: 0.13em;
-  text-transform: uppercase;
-  color: var(--color-muted);
-  text-align: center;
-  margin-top: -0.2rem;
-}
-
-
-/* ── Arrows ── */
-.hero-arrow {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-60%);
-  z-index: 20;
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  border: 1px solid var(--color-border);
-  background-color: rgba(248, 246, 242, 0.85);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-  color: var(--color-muted);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  font-size: 0.75rem;
-  opacity: 0.8;
-  transition: opacity 0.2s ease, border-color 0.2s ease,
-              color 0.2s ease, transform 0.2s ease;
-}
-
-.hero-arrow:hover {
-  opacity: 1;
-  border-color: var(--color-accent);
-  color: var(--color-accent);
-  transform: translateY(-60%) scale(1.1);
-}
-
-/* Keep arrows at viewport edges, outside the oval bleed zone */
-.hero-arrow--left  { left: 0.75rem; }
-.hero-arrow--right { right: 0.75rem; }
-
-.hero-arrow.hidden { opacity: 0 !important; pointer-events: none; }
-
-
-/* ── Down chevron ── */
-.hero-chevron {
-  display: flex;
-  justify-content: center;
-  padding-block: 0.75rem 1.25rem;
-  color: var(--color-muted);
-  font-size: 1.125rem;
-  animation: heroChevronBounce 2.2s ease-in-out infinite;
-}
-
-@keyframes heroChevronBounce {
-  0%, 100% { transform: translateY(0); }
-  50%       { transform: translateY(5px); }
-}
-
-
-/* ── Responsive ── */
-@media (max-width: 1100px) {
-  .hero-stacked__name {
-    /* Allow slight size reduction on mid-size screens */
-    font-size: clamp(2.5rem, 17vw, 11rem);
-  }
-}
-
-@media (max-width: 700px) {
-  .hero-stacked__name {
-    font-size: clamp(2rem, 16vw, 6rem);
-    white-space: nowrap;
-  }
-
-  .hero-c-thumb {
-    width: 105px;
-    height: 138px;
-  }
-
-  .hero-carousel-track {
-    gap: 0.75rem;
-    padding-inline: 0.5vw;
-  }
-
-  .hero-arrow { width: 28px; height: 28px; font-size: 0.6rem; }
-  .hero-arrow--left  { left: 0.35rem; }
-  .hero-arrow--right { right: 0.35rem; }
-}
-
-@media (max-width: 400px) {
-  .hero-stacked__name {
-    font-size: clamp(1.75rem, 14vw, 3.5rem);
-  }
-
-  .hero-c-thumb {
-    width: 85px;
-    height: 112px;
-  }
-}
-
-/* ============================================================
-   CANVA MATCH OVERRIDES
-   Paste at the very bottom of styles.css.
-   These rules override everything above them.
-   ============================================================ */
-
-
-/* ── 1. SEAMLESS BACKGROUND
-   Remove all visible borders/dividers that create the "boxed" look.
-   The hero and featured section should feel like one open canvas.
-   ─────────────────────────────────────────────────────────── */
-
-/* Kill the border that separates hero from featured */
-.hero-stacked {
-  border-bottom: none;
-  overflow: visible;           /* let ovals breathe outside the block */
-}
-
-/* Featured section: same cream bg, no top border, pulled up
-   so it sits flush against the carousel */
-.featured {
-  background-color: var(--color-bg);
-  border-top: none;
-  padding-top: var(--space-lg);  /* less top padding — feels open not cramped */
-}
-
-/* About strip: restore its separator so the section change is clear */
-.about-strip {
-  border-top: 1px solid var(--color-border);
-}
-
-/* Remove any lingering background from the text block */
-.hero-stacked__text {
-  background: none;
-  box-shadow: none;
-}
-
-/* Remove background from carousel row */
-.hero-carousel-row {
-  background: none;
-  box-shadow: none;
-}
-
-/* The carousel scroll should be invisible — just images floating */
-.hero-carousel-scroll {
-  background: none;
-}
-
-/* Carousel track — no card/surface behind it */
-.hero-carousel-track {
-  background: none;
-}
-
-
-/* ── 2. HERO TEXT — centered, airy, name fills the width
-   ─────────────────────────────────────────────────────────── */
-
-.hero-stacked__text {
-  text-align: center;
-  padding-inline: 0;           /* no horizontal padding — let name breathe */
-  padding-top: clamp(1.5rem, 3vw, 2.5rem);
-  padding-bottom: 1.75rem;
-}
-
-/* Eyebrow: centered, more space below it */
-.hero-stacked__eyebrow {
-  text-align: center;
-  margin-bottom: 0.75rem;
-  letter-spacing: 0.22em;
-}
-
-/*
-  NAME — the single most important change.
-  font-size: 18.5vw makes "Nina Cralle" fill the full viewport width.
-  On a 1440px screen that's ~266px — matching the Canva mock exactly.
-  white-space: nowrap keeps it on one line.
-  padding: 0 removes any inset so it truly edge-to-edges.
-*/
-.hero-stacked__name {
-  font-size: clamp(3rem, 14vw, 9.5rem);
-  line-height: 0.95;
-  letter-spacing: -0.02em;
-  white-space: nowrap;
-  text-align: center;
-  margin-bottom: 1.5rem;
-  padding: 0;
-}
-
-/* Subtitle: more breathing room above and below */
-.hero-stacked__sub {
-  font-size: 1.0625rem;
-  line-height: 1.65;
-  max-width: 42ch;
-  margin-inline: auto;
-  margin-bottom: 0.85rem;
-  text-align: center;
-}
-
-/* "Featured Projects" link: centered, comfortable space below before carousel */
-.hero-stacked__link {
-  display: inline-block;
-  margin-bottom: 0;            /* space comes from carousel track padding instead */
-  letter-spacing: 0.03em;
-}
-
-
-/* ── 3. CAROUSEL — embedded, no container, ovals bleed freely
-   ─────────────────────────────────────────────────────────── */
-
-/* Pull carousel up slightly — closes the gap between link and ovals */
-.hero-carousel-row {
-  margin-top: 0.75rem;
-  padding: 0;
-}
-
-/* Overflow visible so ovals clip off screen edges naturally */
-.hero-carousel-scroll {
-  overflow-x: auto;
-  overflow-y: visible;
-  /* Softer edge fade — ovals bleed almost to viewport edges */
-  -webkit-mask-image: linear-gradient(
-    to right,
-    transparent 0%,
-    black 2%,
-    black 98%,
-    transparent 100%
-  );
-  mask-image: linear-gradient(
-    to right,
-    transparent 0%,
-    black 2%,
-    black 98%,
-    transparent 100%
-  );
-}
-
-.hero-carousel-track {
-  /* Almost no padding — ovals should bleed off both edges */
-  padding-inline: 6vw;
-  padding-top: 0.35rem;
-  padding-bottom: 1.25rem;
-  gap: 2.5rem;               /* slightly tighter — more ovals visible at once */
-  align-items: flex-end;
-}
-
-/*
-  OVAL SIZE — match the Canva mock.
-  In the Canva screenshot ovals are roughly 185px wide × 245px tall.
-  Using vw so they scale proportionally.
-*/
-.hero-c-thumb {
-  width:  clamp(105px, 9.2vw, 145px);
-  height: clamp(138px, 12.2vw, 190px);
-}
-
-/* Label spacing */
-.hero-c-label {
-  margin-top: 0.75rem;
-  font-size: 0.9rem;
-   opacity: 0.8;
-}
-
-
-/* ── 4. CHEVRON — pull it up, less gap after carousel
-   ─────────────────────────────────────────────────────────── */
-
-.hero-chevron {
-  padding-block: 0.15rem 0.8rem;
-  margin-top: -0.15rem;
-}
-
-
-/* ── 5. FEATURED SECTION — flows from hero seamlessly
-   ─────────────────────────────────────────────────────────── */
-
-/* Container max-width stays, but remove any visible bg differentiation */
-.featured .container {
-  background: none;
-}
-
-/* "Selected Work" header: a little less space above */
-.featured__header {
-  margin-bottom: var(--space-md);
-}
-
-
-/* ── 6. RESPONSIVE FIXES
-   ─────────────────────────────────────────────────────────── */
-
-@media (max-width: 1100px) {
-  .hero-stacked__name {
-    font-size: clamp(2.5rem, 17vw, 11rem);
-  }
-}
-
-@media (max-width: 700px) {
-  .hero-stacked__name {
-    font-size: clamp(2rem, 16vw, 6rem);
-    white-space: nowrap;
-  }
-
-  .hero-c-thumb {
-    width: 108px;
-    height: 142px;
-  }
-
-  .hero-carousel-track {
-    gap: 0.625rem;
-    padding-inline: 0.25vw;
-  }
-}
-
-@media (max-width: 400px) {
-  .hero-stacked__name {
-    font-size: clamp(2.5rem, 12vw, 8rem);
-  }
-  .hero-c-thumb {
-    width: 86px;
-    height: 114px;
-  }
-}
-/* ============================================================
-   MOCKUP MATCH — final landing page composition
-   Paste at the very bottom of styles.css
-   ============================================================ */
-
-
-/* ── NAV LOGO — uppercase, tracked-out Instrument Sans ── */
-.nav__logo {
-  font-family: 'Instrument Sans', system-ui, sans-serif;
-  font-size: 0.875rem;
-  font-weight: 500;
-  letter-spacing: 0.32em;
-  text-transform: uppercase;
-}
-
-/* Nav links — match mockup's tracked uppercase style */
-.nav__links a,
-.nav__mobile a {
-  font-family: 'Instrument Sans', system-ui, sans-serif;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  font-size: 0.75rem;
-}
-
-
-/* ============================================================
-   HERO — mockup composition
-   ============================================================ */
-
-.hero-mock {
-  background-color: var(--color-bg);
-  padding-top: clamp(3rem, 7vw, 6rem);
-  padding-bottom: clamp(3rem, 7vw, 5.5rem);
-  overflow: hidden;
-}
-
-.hero-mock__inner {
-  max-width: 1100px;
-  margin-inline: auto;
-  padding-inline: var(--space-md);
-  text-align: center;
-}
-
-/* "PRODUCT DESIGNER · UX DESIGNER" eyebrow */
-.hero-mock__role {
-  font-family: 'Instrument Sans', system-ui, sans-serif;
-  font-size: 0.8125rem;
-  font-weight: 500;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
-  color: var(--color-text);
-  margin-bottom: 1.75rem;
-  opacity: 0.85;
-}
-
-/* Row that holds headline + hanko — flex so seal sits to the right */
-.hero-mock__headline-row {
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  gap: clamp(0.75rem, 2.5vw, 1.75rem);
-  max-width: 880px;
-  margin-inline: auto;
-}
-
-/* Headline — Cormorant Garamond, italics for the three keywords */
-.hero-mock__headline {
-  font-family: var(--font-display);
-  font-weight: 500;
-  font-size: clamp(1.5rem, 3.2vw, 2.4rem);
-  line-height: 1.35;
-  letter-spacing: -0.005em;
-  color: var(--color-text);
-  text-align: left;
-  flex: 1;
-  max-width: 700px;
-}
-
-.hero-mock__headline em {
-  font-style: italic;
-  color: var(--color-text);  /* same color — italic does the work */
-}
-
-/* Hanko seal — sized relative to headline */
-.hero-mock__hanko {
-  width: clamp(54px, 5.5vw, 84px);
-  height: auto;
-  flex-shrink: 0;
-  margin-bottom: 0.25rem;     /* tiny lift so it aligns with last line */
-  align-self: flex-end;
-}
-
-
-/* ============================================================
-   FEATURED PROJECTS — asymmetric grid
-   ============================================================ */
-
-.featured-mock {
-  background-color: var(--color-bg);
-  padding-block: clamp(2rem, 4vw, 4rem);
-  padding-inline: clamp(1rem, 3vw, 3rem);
-}
-
-/* 3-column / 2-row grid: MyAbility spans 2 cols & 2 rows;
-   Emilia's and Sakura stack on the right column */
-.featured-mock__grid {
-  display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
-  grid-template-rows: auto auto;
-  gap: 1.25rem;
-  max-width: 1280px;
-  margin-inline: auto;
-}
-
-/* Base card */
-.fcard {
-  position: relative;
-  background-color: #F1ECE2;       /* slightly warmer card bg — matches mockup */
-  border-radius: 14px;
-  overflow: hidden;
-  text-decoration: none;
-  color: var(--color-text);
-  display: flex;
-  transition: transform var(--ease), box-shadow var(--ease);
-}
-
-.fcard:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
-}
-
-/* — Badge (top-right pill on every card) — */
-.fcard__badge {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  z-index: 3;
-  font-family: 'Instrument Sans', system-ui, sans-serif;
-  font-size: 0.625rem;
-  font-weight: 500;
-  letter-spacing: 0.18em;
-  padding: 0.4rem 0.75rem;
-  border-radius: 4px;
-  color: #fff;
-  text-transform: uppercase;
-}
-
-.fcard__badge--silver   { background: rgba(40, 40, 40, 0.78); }
-.fcard__badge--capstone { background: rgba(180, 80, 50, 0.92); }
-.fcard__badge--web      { background: rgba(40, 40, 40, 0.78); }
-
-
-/* ── LARGE card — MyAbility (spans 2 cols, 2 rows) ── */
-.fcard--large {
-  grid-column: 1 / 3;
-  grid-row: 1 / 3;
-  flex-direction: row;          /* body left, image right */
-  min-height: 460px;
-}
-
-.fcard--large .fcard__body {
-  flex: 1;
-  padding: 2.25rem 2rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  justify-content: space-between;
-}
-
-.fcard--large .fcard__image {
-  flex: 1.1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(135deg, #C9B8D6 0%, #B8B5E0 100%);  /* subtle lavender — replace if needed */
-  overflow: hidden;
-}
-
-.fcard--large .fcard__image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-}
-
-.fcard__eyebrow {
-  font-family: 'Instrument Sans', system-ui, sans-serif;
-  font-size: 0.6875rem;
-  font-weight: 500;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--color-muted);
-}
-
-.fcard__title {
-  font-family: var(--font-display);
-  font-size: clamp(2rem, 3.2vw, 2.75rem);
-  font-weight: 600;
-  line-height: 1.1;
-  color: var(--color-text);
-  margin-top: 0.5rem;
-}
-
-.fcard__title--sm {
-  font-size: 1.5rem;
-  margin-top: 0;
-}
-
-.fcard__meta {
-  font-family: 'Instrument Sans', system-ui, sans-serif;
-  font-size: 0.8125rem;
-  color: var(--color-muted);
-  margin-top: 0.35rem;
-  letter-spacing: 0.02em;
-}
-
-.fcard__desc {
-  font-size: 0.9rem;
-  line-height: 1.55;
-  color: var(--color-muted);
-  max-width: 36ch;
-  margin-top: 1rem;
-}
-
-/* Award row on MyAbility card — laurel + label */
-.fcard__award {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  margin-top: 1.5rem;
-}
-
-.fcard__award-icon {
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.25rem;
-  background: rgba(0, 0, 0, 0.04);
-  border: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-.fcard__award-label {
-  font-family: 'Instrument Sans', system-ui, sans-serif;
-  font-size: 0.6875rem;
-  font-weight: 500;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--color-muted);
-}
-
-.fcard__award-title {
-  font-family: 'Instrument Sans', system-ui, sans-serif;
-  font-size: 0.95rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  color: var(--color-text);
-  margin-top: 0.1rem;
-}
-
-
-/* ── SMALL cards — Emilia's + Sakura (stacked right column) ── */
-.fcard--small {
-  flex-direction: column;
-  min-height: 220px;
-}
-
-.fcard--small.fcard:nth-of-type(2) { grid-column: 3; grid-row: 1; }
-.fcard--small.fcard:nth-of-type(3) { grid-column: 3; grid-row: 2; }
-
-.fcard__image--top {
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  overflow: hidden;
-  background-color: var(--color-card);
-}
-
-.fcard__image--top img,
-.fcard__image--top .img-placeholder {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 0;
-  min-height: unset;
-}
-
-.fcard__body--small {
-  padding: 1.25rem 1.25rem 1.5rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-}
-
-.fcard--small .fcard__desc {
-  margin-top: 0.6rem;
-  font-size: 0.85rem;
-}
-
-/* Capstone winner pill (Emilia's) */
-.fcard__capstone-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin-top: 0.85rem;
-  padding: 0.4rem 0.65rem;
-  background: rgba(180, 80, 50, 0.1);
-  border-radius: 100px;
-  width: fit-content;
-  font-family: 'Instrument Sans', system-ui, sans-serif;
-  font-size: 0.7rem;
-  color: var(--color-text);
-  line-height: 1.25;
-}
-
-.fcard__capstone-icon { font-size: 0.85rem; }
-.fcard__capstone-sub  { opacity: 0.6; font-size: 0.65rem; letter-spacing: 0.05em; }
-
-
-/* ============================================================
-   TAGLINE STRIP — "Design with purpose · NC · Empathy as direction"
-   ============================================================ */
-
-.tagline-strip {
-  background-color: var(--color-bg);
-  padding-block: 2.5rem;
-  border-top: 1px solid var(--color-border);
-}
-
-.tagline-strip__inner {
-  max-width: 900px;
-  margin-inline: auto;
-  padding-inline: var(--space-md);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: clamp(1.5rem, 5vw, 3.5rem);
-}
-
-.tagline-strip__text {
-  font-family: 'Instrument Sans', system-ui, sans-serif;
-  font-size: 0.75rem;
-  font-weight: 500;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
-  color: var(--color-text);
-  opacity: 0.75;
-}
-
-.tagline-strip__mark {
-  width: clamp(36px, 4vw, 52px);
-  height: auto;
-  flex-shrink: 0;
-}
-
-
-/* ============================================================
-   RESPONSIVE
-   ============================================================ */
-
-@media (max-width: 900px) {
-  /* Stack the asymmetric grid */
-  .featured-mock__grid {
-    grid-template-columns: 1fr;
-  }
-
-  .fcard--large {
-    grid-column: 1;
-    grid-row: auto;
-    flex-direction: column;
-    min-height: 0;
-  }
-
-  .fcard--large .fcard__image {
-    aspect-ratio: 16 / 10;
-    width: 100%;
-  }
-
-  .fcard--small.fcard:nth-of-type(2),
-  .fcard--small.fcard:nth-of-type(3) {
-    grid-column: 1;
-    grid-row: auto;
-  }
-
-  /* Hero stacks hanko under headline on smaller screens */
-  .hero-mock__headline-row {
-    flex-direction: column;
-    align-items: center;
-    gap: 1.5rem;
-  }
-
-  .hero-mock__headline {
-    text-align: center;
-  }
-}
-
-@media (max-width: 600px) {
-  .tagline-strip__inner {
-    flex-direction: column;
-    gap: 1rem;
-  }
-}
-
-/* ============================================================
-   FINAL MOCKUP FIXES — paste at very bottom of styles.css
-   ============================================================ */
-
-/* ── HANKO POSITIONING — bottom-right of headline like a signature ── */
-
-.hero-mock__headline-row {
-  position: relative;
-  max-width: 780px;
-  margin-inline: auto;
-  display: block;
-  padding-right: clamp(60px, 8vw, 100px);   /* reserves space for the seal */
-}
-
-.hero-mock__headline {
-  text-align: left;
-  max-width: 700px;
-}
-
-.hero-mock__hanko {
-  position: absolute;
-  right: 0;
-  bottom: -0.5rem;
-  width: clamp(54px, 5.5vw, 78px);
-  height: auto;
-  z-index: 2;
-  margin-bottom: 0;                          /* overrides earlier margin */
-  align-self: unset;                         /* overrides earlier flex align */
-}
-
-
-/* ── FEATURED GRID — all 3 cards in a single row, no peek ── */
-
-.featured-mock__grid {
-  grid-template-columns: 2fr 1fr 1fr;
-  grid-template-rows: 1fr;                   /* single row */
-  max-width: 1360px;
-}
-
-.fcard--large {
-  grid-column: 1;
-  grid-row: 1;                               /* was 1/3 — now single row */
-  min-height: 460px;
-}
-
-.fcard--small.fcard:nth-of-type(2) { grid-column: 2; grid-row: 1; }
-.fcard--small.fcard:nth-of-type(3) { grid-column: 3; grid-row: 1; }
-
-
-/* ── MOBILE — stack cleanly, seal drops below headline ── */
-
-@media (max-width: 900px) {
+  /* Featured grid stacks vertically */
   .featured-mock__grid {
     grid-template-columns: 1fr;
   }
@@ -2518,9 +1455,43 @@ body { padding-top: var(--nav-height); }
     flex-direction: column;
     min-height: 0;
   }
+
+  .fcard--large .fcard__image {
+    aspect-ratio: 16 / 10;
+    width: 100%;
+    flex: none;
+  }
+
+  /* Projects list page */
+  .projects-grid__layout { grid-template-columns: 1fr; }
+
+  .card--featured { flex-direction: column; }
+  .card--featured .card__image {
+    width: 100%;
+    min-height: 240px;
+    aspect-ratio: 3 / 2;
+  }
+
+  /* About page */
+  .about-grid { grid-template-columns: 1fr; }
+
+  .about-photo {
+    position: static;
+    aspect-ratio: 4 / 3;
+    max-width: 400px;
+  }
+
+  .about-strip__inner { grid-template-columns: 1fr; }
+
+  /* Project detail page */
+  .solution-grid { grid-template-columns: 1fr; }
+  .results-grid  { grid-template-columns: repeat(3, 1fr); }
 }
 
+
+/* ── Small tablet / large phone: ≤ 640px ── */
 @media (max-width: 640px) {
+  /* Hanko drops below the headline on narrow screens */
   .hero-mock__headline-row {
     padding-right: 0;
   }
@@ -2531,4 +1502,38 @@ body { padding-top: var(--nav-height); }
     margin: 1rem 0 0 auto;
     width: 56px;
   }
+}
+
+
+/* ── Mobile: ≤ 600px ── */
+@media (max-width: 600px) {
+  :root {
+    --space-xl: 4rem;
+    --space-lg: 2.5rem;
+  }
+
+  /* Mobile nav */
+  .nav__links { display: none; }
+  .nav__toggle { display: flex; }
+
+  /* Tagline strip stacks */
+  .tagline-strip__inner {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  /* Footer stacks */
+  .footer__inner { flex-direction: column; }
+  .footer__copy  { text-align: left; }
+
+  /* Project detail page */
+  .results-grid { grid-template-columns: 1fr; }
+  .process-row  { grid-template-columns: 1fr; }
+
+  .project-nav__inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .project-nav__link--next { text-align: left; }
 }
