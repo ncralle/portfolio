@@ -1141,10 +1141,22 @@ strong { font-weight: 600; color: var(--color-text); }
 }
 
 .solution-card__img {
-  aspect-ratio: 4 / 3;
   border-radius: var(--radius-sm);
-  overflow: hidden;
   margin-bottom: 0.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  overflow: visible;
+  background: transparent;
+}
+.solution-card__img img {
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  max-height: 440px;      /* keeps the three cards balanced */
+  object-fit: contain;
+  display: block;
+  border-radius: var(--radius-sm);
 }
 
 .solution-card h4 { color: var(--color-text); }
