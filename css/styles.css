@@ -1150,6 +1150,22 @@ strong { font-weight: 600; color: var(--color-text); }
 .solution-card h4 { color: var(--color-text); }
 .solution-card p { font-size: 0.9375rem; max-width: none; }
 
+/* Solution cards hold tall phone screenshots — show them in full, not cropped */
+.solution-card__img {
+  height: auto;          /* was a fixed height that cropped the phones */
+  overflow: visible;
+  background: transparent;
+  display: flex;
+  justify-content: center;
+}
+.solution-card__img img {
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  max-height: 440px;     /* keeps the three cards balanced in height */
+  object-fit: contain;
+  display: block;
+}
 /* Process row (wireframe thumbnails) */
 .process-row {
   display: grid;
