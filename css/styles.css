@@ -1216,6 +1216,9 @@ strong { font-weight: 600; color: var(--color-text); }
   margin-top: 0.4rem;
 }
 
+.img-crop-top { overflow: hidden; border-radius: var(--radius-md); }
+.img-crop-top img { margin-top: -6%; }
+
 /* Reflection quote block */
 .reflection-block {
   background-color: var(--color-card);
