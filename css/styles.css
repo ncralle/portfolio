@@ -1217,7 +1217,7 @@ strong { font-weight: 600; color: var(--color-text); }
 }
 
 .img-crop-top { overflow: hidden; border-radius: var(--radius-md); }
-.img-crop-top img { margin-top: -6%; }
+.img-crop-top img { margin-top: -10%; margin-bottom: -10%; }
 
 /* Reflection quote block */
 .reflection-block {
