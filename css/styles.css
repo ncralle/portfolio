@@ -124,12 +124,6 @@ button {
   border-radius: 2px;
 }
 
-/* Don't draw the focus box around tab panels on load */
-.tab-pane:focus,
-.tab-pane:focus-visible{
-  outline: none;
-}
-
 ::selection {
   background-color: var(--color-accent);
   color: #fff;
