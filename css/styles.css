@@ -534,12 +534,13 @@ strong { font-weight: 600; color: var(--color-text); }
   box-shadow: 0 4px 16px rgba(194, 98, 29, 0.28);
 }
 
-/* Hanko seal — sits to the right of the statement */
+/* Hanko seal — small sign-off, bottom-right like a stamp */
 .hero-mock__hanko {
   flex: 0 0 auto;
-  align-self: center;
-  width: clamp(76px, 9vw, 128px);
+  align-self: flex-end;              /* drops to the bottom of the row */
+  width: clamp(52px, 5vw, 76px);     /* ~40% smaller */
   height: auto;
+  margin-bottom: 0.25rem;            /* settles it near the buttons' baseline */
 }
 
 /* ============================================================
