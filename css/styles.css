@@ -502,10 +502,10 @@ strong { font-weight: 600; color: var(--color-text); }
 /* Supporting line with colored keywords */
 .hero-mock__subhead {
   font-family: var(--font-display);
-  font-weight: 400;
+  font-weight: 500;                 /* a bit more weight so the italic serif holds up */
   font-size: clamp(1.5rem, 3vw, 2.25rem);
   line-height: 1.25;
-  color: var(--color-muted);
+  color: #55514A;                   /* darker warm gray — readable, still below the headline */
   margin-top: 1rem;
   max-width: none;
 }
